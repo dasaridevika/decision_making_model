@@ -73,9 +73,9 @@ with st.sidebar:
 with st.form("inquiry_form"):
     col1, col2 = st.columns(2)
     with col1:
-        client_name = st.text_input("Your Name *", placeholder="e.g. devika")
+        client_name = st.text_input("Your Name *", placeholder="Enter your name")
     with col2:
-        company_name = st.text_input("Company / Organization", placeholder="e.g. Titan")
+        company_name = st.text_input("Company / Organization", placeholder="Enter company name")
 
     is_existing = st.radio(
         "Are you an existing client?",
@@ -85,8 +85,8 @@ with st.form("inquiry_form"):
     )
     is_known = (is_existing == "Yes, I have an active account / project with you")
 
-    subject = st.text_input("Subject *", placeholder="e.g. Project updates / Pricing inquiry")
-    message = st.text_area("How can we help you? *", placeholder="Please describe your query, request, or issue...", height=130)
+    subject = st.text_input("Subject *", placeholder="Enter subject")
+    message = st.text_area("How can we help you? *", placeholder="Enter your message or inquiry...", height=130)
 
     submit_btn = st.form_submit_button("Submit Request", type="primary", use_container_width=True)
 
@@ -100,11 +100,11 @@ if submit_btn:
         st.warning("Please configure your Cloudflare Worker URL in `.streamlit/secrets.toml` or the sidebar.")
     else:
         payload = {
-            "client_name": client_name or "Valued Client",
-            "company": company_name or "N/A",
+            "client_name": client_name.strip(),
+            "company": company_name.strip(),
             "is_known_client": is_known,
-            "subject": subject,
-            "message": message
+            "subject": subject.strip(),
+            "message": message.strip()
         }
 
         with st.spinner("Cloudflare Workers AI is evaluating your inquiry..."):
