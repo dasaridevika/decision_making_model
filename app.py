@@ -168,17 +168,11 @@ def evaluate_decision(client_name: str, company: str, is_known_client: bool, sub
 # -------------------------------------------------------------
 with st.sidebar:
     st.header("⚙️ Settings")
-    model_choice = st.selectbox(
-        "Select Clef Model:",
-        ["clef-flash", "clef"],
-        index=0,
-        help="clef-flash: Ultra-fast decision making | clef: Standard deep reasoning"
-    )
     worker_url = st.text_input(
         "Cloudflare Worker URL (Optional):",
         value="",
         placeholder="https://your-worker.workers.dev",
-        help="If provided, queries will route through your Cloudflare Worker AI."
+        help="If provided, queries will route through your Cloudflare Worker AI (Auto-Model Selection)."
     )
 
 with st.form("inquiry_form"):
@@ -215,7 +209,6 @@ if submit_btn:
             with st.spinner("Connecting to Cloudflare Worker AI..."):
                 try:
                     payload = {
-                        "model": model_choice,
                         "client_name": client_name or "Valued Client",
                         "company": company_name or "N/A",
                         "is_known_client": is_known,
