@@ -88,10 +88,18 @@ with st.form("inquiry_form"):
     subject = st.text_input("Subject *", placeholder="Enter subject")
     message = st.text_area("How can we help you? *", placeholder="Enter your message or inquiry...", height=130)
 
+    # Image attachments (Clef extension: PNG, JPEG, WebP, max 4)
+    uploaded_images = st.file_uploader(
+        "Attach Screenshots / Images (Optional, max 4 images):",
+        type=["png", "jpg", "jpeg", "webp"],
+        accept_multiple_files=True,
+        help="Supports PNG, JPEG, or WebP up to 4MB each"
+    )
+
     submit_btn = st.form_submit_button("Submit Request", type="primary", use_container_width=True)
 
 # -------------------------------------------------------------
-# AI-Driven Decision Execution (No Hardcoded Keyword Rules)
+# AI-Driven Decision Execution
 # -------------------------------------------------------------
 if submit_btn:
     if not message.strip():
@@ -99,12 +107,26 @@ if submit_btn:
     elif not worker_url.strip():
         st.warning("Please configure your Cloudflare Worker URL in `.streamlit/secrets.toml` or the sidebar.")
     else:
+        # Convert attached images to base64 Data URLs (max 4)
+        images_payload = []
+        if uploaded_images:
+            if len(uploaded_images) > 4:
+                st.warning("Maximum of 4 images allowed. Processing the first 4 images.")
+            
+            import base64
+            for img_file in uploaded_images[:4]:
+                file_bytes = img_file.read()
+                b64_encoded = base64.b64encode(file_bytes).decode("utf-8")
+                mime = img_file.type if img_file.type else "image/png"
+                images_payload.append(f"data:{mime};base64,{b64_encoded}")
+
         payload = {
             "client_name": client_name.strip(),
             "company": company_name.strip(),
             "is_known_client": is_known,
             "subject": subject.strip(),
-            "message": message.strip()
+            "message": message.strip(),
+            "images": images_payload
         }
 
         with st.spinner("Cloudflare Workers AI is evaluating your inquiry..."):
