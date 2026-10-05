@@ -107,33 +107,37 @@ def evaluate_decision(client_name: str, company: str, is_known_client: bool, sub
         "customer_support": 0.1
     }
 
-    # Sales / Pricing triggers
-    if any(w in text for w in ["pricing", "price", "quote", "quotation", "cost", "demo", "how much", "details", "hire", "services", "solar", "new project"]):
-        scores["sales_bdr"] += 0.85
+    # 1. Project Manager triggers (Project updates, milestones, status walkthroughs, delivery dates)
+    if any(w in text for w in ["status", "update", "updates", "progress", "walkme through", "walk me through", "timeline", "milestone", "sprint", "delivery", "schedule", "when will", "deadline"]):
+        scores["project_manager"] += 1.5
 
-    # Solutions Architecture triggers
-    if any(w in text for w in ["architecture", "api", "integration", "soc2", "vpc", "cloud", "security", "scalability", "tech stack"]):
-        scores["solutions_architect"] += 0.85
+    # 2. Sales / Pricing triggers (New sales, quotes, demos, pricing)
+    if any(w in text for w in ["pricing", "price", "quote", "quotation", "cost", "how much", "hire", "buy", "purchase", "packages"]):
+        scores["sales_bdr"] += 1.2
 
-    # Project Manager triggers
-    if any(w in text for w in ["sprint", "milestone", "delivery", "timeline", "update", "progress", "schedule", "deadline", "status", "when will"]):
-        scores["project_manager"] += 0.90
+    # 3. Solutions Architecture triggers (Deep technical architecture, SOC2, VPC, custom APIs)
+    if any(w in text for w in ["architecture", "soc2", "vpc", "custom api", "mtls", "infrastructure", "scalability", "tech stack"]):
+        scores["solutions_architect"] += 1.3
 
-    # Account Manager triggers
+    # 4. Account Manager triggers (Contracts, licenses, billing, renewals)
     if any(w in text for w in ["renew", "renewal", "contract", "billing", "invoice", "seats", "license", "payment", "upgrade"]):
-        scores["account_manager"] += 0.90
+        scores["account_manager"] += 1.3
 
-    # Customer Support triggers
+    # 5. Customer Support triggers (Errors, bugs, outages)
     if any(w in text for w in ["bug", "error", "500", "404", "crash", "down", "outage", "broken", "issue", "failure", "not working", "login"]):
-        scores["customer_support"] += 0.95
+        scores["customer_support"] += 1.5
 
     # Relationship Context adjustment
     if is_known_client:
-        scores["sales_bdr"] *= 0.2
+        scores["project_manager"] *= 1.4
+        scores["account_manager"] *= 1.3
+        scores["sales_bdr"] *= 0.1
     else:
-        scores["project_manager"] *= 0.1
-        scores["account_manager"] *= 0.1
-        scores["customer_support"] *= 0.3
+        # If asking explicitly about existing project status, give priority to PM
+        if any(w in text for w in ["project status", "status of the project", "project update", "project updates", "sprint"]):
+            scores["project_manager"] *= 1.3
+        else:
+            scores["sales_bdr"] *= 1.2
 
     chosen_rep_key = max(scores, key=scores.get)
 
