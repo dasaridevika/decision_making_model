@@ -1,36 +1,19 @@
 import streamlit as st
-import base64
 import requests
-from schema import ClefDecisionRequest
-from decision_engine import (
-    build_client_state,
-    build_clef_request,
-    simulate_clef_decision
-)
 
+# Set page config
 st.set_page_config(
     page_title="Client Support & Inquiry Portal",
     page_icon="💼",
     layout="centered"
 )
 
-# Clean, elegant styling
+# Custom Styling
 st.markdown("""
 <style>
-    .main-header {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-    .main-title {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #111827;
-        margin-bottom: 0.25rem;
-    }
-    .sub-title {
-        font-size: 1rem;
-        color: #6B7280;
-    }
+    .main-header { text-align: center; margin-bottom: 2rem; }
+    .main-title { font-size: 2rem; font-weight: 700; color: #111827; }
+    .sub-title { font-size: 1rem; color: #6B7280; }
     .result-box {
         background-color: #F8FAFC;
         border: 1px solid #E2E8F0;
@@ -49,12 +32,7 @@ st.markdown("""
         font-size: 0.95rem;
         margin-bottom: 0.75rem;
     }
-    .rep-name {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: #0F172A;
-        margin-bottom: 0.5rem;
-    }
+    .rep-name { font-size: 1.4rem; font-weight: 700; color: #0F172A; margin-bottom: 0.5rem; }
     .next-steps {
         background: #FFFFFF;
         border-radius: 8px;
@@ -68,9 +46,16 @@ st.markdown("""
 st.markdown("""
 <div class="main-header">
     <div class="main-title">💼 Client Inquiry & Support Portal</div>
-    <div class="sub-title">Submit your request below and we will instantly connect you with the right representative.</div>
+    <div class="sub-title">Powered by Cloudflare Workers AI (@cf/cloudflare/clef)</div>
 </div>
 """, unsafe_allow_html=True)
+
+# Cloudflare Worker Endpoint
+worker_url = st.sidebar.text_input(
+    "Cloudflare Worker URL:",
+    value="https://client-decision-router.your-subdomain.workers.dev",
+    help="Enter your deployed Cloudflare Worker URL"
+)
 
 with st.form("inquiry_form"):
     col1, col2 = st.columns(2)
@@ -87,31 +72,32 @@ with st.form("inquiry_form"):
     )
     is_known = (is_existing == "Yes, I have an active account / project with you")
 
-    subject = st.text_input("Subject *", placeholder="e.g. Question about project delivery date / Quote request")
+    subject = st.text_input("Subject *", placeholder="e.g. Pricing quotation / Project status update")
     message = st.text_area("How can we help you? *", placeholder="Please describe your query, request, or issue...", height=140)
 
     submit_btn = st.form_submit_button("Submit Request", type="primary", use_container_width=True)
 
 if submit_btn:
     if not message.strip():
-        st.error("Please enter a message before submitting.")
+        st.error("Please enter your message before submitting.")
     else:
-        # Build client state
-        client_state = build_client_state(
-            client_name=client_name or "Valued Client",
-            company=company_name or "N/A",
-            is_known_client=is_known,
-            subject=subject,
-            message=message
-        )
-        
-        clef_req = build_clef_request(state=client_state)
-        decision_res = simulate_clef_decision(clef_req)
+        # Prepare structured payload for Cloudflare Worker AI
+        payload = {
+            "model": "clef-flash",
+            "state": {
+                "client_profile": {
+                    "name": client_name or "Valued Client",
+                    "company": company_name or "N/A",
+                    "is_known_client": is_known
+                },
+                "inquiry": {
+                    "subject": subject,
+                    "message": message
+                }
+            }
+        }
 
-        assigned_rep = decision_res["assigned_representative"]["choice"]
-        urgency_level = decision_res["inquiry_urgency"]["level"]
-
-        # Human friendly metadata mapping
+        # Representative metadata for client presentation
         rep_profiles = {
             "sales_bdr": {
                 "title": "Sales & Business Development Representative",
@@ -150,23 +136,40 @@ if submit_btn:
             }
         }
 
-        profile = rep_profiles.get(assigned_rep, rep_profiles["customer_support"])
-        urgency_text = ["Standard", "Standard", "High Priority", "Urgent / Blocker"][min(urgency_level, 3)]
+        with st.spinner("Connecting to Cloudflare Workers AI for decision..."):
+            try:
+                # Direct call to Cloudflare Worker
+                response = requests.post(worker_url, json=payload, timeout=10)
+                
+                if response.status_code == 200:
+                    data = response.json()
+                    decision = data.get("decision", {})
+                    
+                    # Extract decision from Worker AI
+                    assigned_rep = decision.get("assigned_representative", {}).get("choice", "sales_bdr")
+                    urgency_level = decision.get("inquiry_urgency", {}).get("level", 1)
+                    
+                    profile = rep_profiles.get(assigned_rep, rep_profiles["sales_bdr"])
+                    urgency_text = ["Standard", "Standard", "High Priority", "Urgent / Blocker"][min(urgency_level, 3)]
 
-        st.markdown(f"""
-        <div class="result-box">
-            <div class="assigned-badge">{profile['team']}</div>
-            <div class="rep-name">{profile['icon']} Assigned Representative: {profile['title']}</div>
-            <p style="color: #4B5563; margin-bottom: 0.5rem;">
-                Hello <b>{client_name or 'there'}</b>, thank you for reaching out. Based on your request, your inquiry has been routed directly to the appropriate team.
-            </p>
-            <div class="next-steps">
-                <b>📌 What happens next:</b>
-                <p style="margin: 0.25rem 0 0.5rem 0; color: #374151;">{profile['action']}</p>
-                <div style="font-size: 0.9rem; color: #6B7280;">
-                    ⏱️ <b>Expected Response Time:</b> {profile['response_time']} &nbsp;|&nbsp; 
-                    🏷️ <b>Priority Level:</b> {urgency_text}
-                </div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+                    st.markdown(f"""
+                    <div class="result-box">
+                        <div class="assigned-badge">{profile['team']}</div>
+                        <div class="rep-name">{profile['icon']} Assigned Representative: {profile['title']}</div>
+                        <p style="color: #4B5563; margin-bottom: 0.5rem;">
+                            Hello <b>{client_name or 'there'}</b>, thank you for reaching out. Your inquiry has been processed and routed.
+                        </p>
+                        <div class="next-steps">
+                            <b>📌 What happens next:</b>
+                            <p style="margin: 0.25rem 0 0.5rem 0; color: #374151;">{profile['action']}</p>
+                            <div style="font-size: 0.9rem; color: #6B7280;">
+                                ⏱️ <b>Expected Response Time:</b> {profile['response_time']} &nbsp;|&nbsp; 
+                                🏷️ <b>Priority Level:</b> {urgency_text}
+                            </div>
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                else:
+                    st.error(f"Cloudflare Worker returned error: {response.status_code} - {response.text}")
+            except Exception as e:
+                st.warning(f"Could not reach Cloudflare Worker at `{worker_url}`. Please check your deployed Worker URL in the sidebar.")
