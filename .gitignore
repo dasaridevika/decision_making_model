@@ -1,6 +1,9 @@
 # Ignore worker code as requested
 worker/
 
+# Streamlit secrets (protects your secret worker URL from being exposed)
+.streamlit/secrets.toml
+
 # Python cache & build files
 __pycache__/
 *.py[cod]

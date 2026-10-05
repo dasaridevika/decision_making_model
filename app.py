@@ -168,15 +168,24 @@ def evaluate_decision(client_name: str, company: str, is_known_client: bool, sub
     }
 
 # -------------------------------------------------------------
-# User Interface Form
+# Read Cloudflare Worker URL from Streamlit Secrets
 # -------------------------------------------------------------
+default_worker_url = ""
+try:
+    if "CLOUDFLARE_WORKER_URL" in st.secrets:
+        default_worker_url = st.secrets["CLOUDFLARE_WORKER_URL"]
+    elif "WORKER_URL" in st.secrets:
+        default_worker_url = st.secrets["WORKER_URL"]
+except Exception:
+    pass
+
 with st.sidebar:
     st.header("⚙️ Settings")
     worker_url = st.text_input(
-        "Cloudflare Worker URL (Optional):",
-        value="",
+        "Cloudflare Worker URL:",
+        value=default_worker_url,
         placeholder="https://your-worker.workers.dev",
-        help="If provided, queries will route through your Cloudflare Worker AI (Auto-Model Selection)."
+        help="Reads automatically from .streamlit/secrets.toml"
     )
 
 with st.form("inquiry_form"):
