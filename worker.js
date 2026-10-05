@@ -1,7 +1,7 @@
 const DECISION_QUESTIONS = {
   assigned_representative: {
     type: "choice",
-    instructions: "Analyze the inquiry. If the user asks about project status, delivery dates, timelines, milestones, or progress updates, ALWAYS choose project_manager.",
+    instructions: "Analyze the inquiry and any attached screenshots/images. If the user asks about project status, delivery dates, timelines, milestones, or progress updates, ALWAYS choose project_manager.",
     criteria: {
       project_manager: "For ANY inquiry regarding project status, delivery dates, timelines, milestones, sprint progress, or deliverables walkthroughs.",
       sales_bdr: "Strictly for new business inquiries asking about purchasing services, initial pricing quotations, product overview brochures, sales discovery, or scheduling a demo.",
@@ -75,11 +75,6 @@ const CORS_HEADERS = {
   "Content-Type": "application/json"
 };
 
-function autoSelectModel(text) {
-  const complexTriggers = ["architecture", "soc2", "vpc", "compliance", "integration", "mtls", "legal", "sla"];
-  return complexTriggers.some(t => text.toLowerCase().includes(t)) ? "@cf/cloudflare/clef" : "@cf/cloudflare/clef-flash";
-}
-
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") {
@@ -87,7 +82,10 @@ export default {
     }
 
     if (request.method === "GET") {
-      return new Response(JSON.stringify({ status: "online", service: "Clef Decision Router" }), { status: 200, headers: CORS_HEADERS });
+      return new Response(
+        JSON.stringify({ status: "online", service: "Clef Decision Routing Engine" }),
+        { status: 200, headers: CORS_HEADERS }
+      );
     }
 
     try {
@@ -96,7 +94,13 @@ export default {
       const isKnownClient = body.is_known_client ?? false;
       const subject = body.subject || "";
       const message = body.message || "";
+      const images = body.images || [];
 
+      if (!message.trim()) {
+        return new Response(JSON.stringify({ error: "Missing inquiry message." }), { status: 400, headers: CORS_HEADERS });
+      }
+
+      // 1. Structure Clef state
       const state = {
         client_profile: {
           name: clientName,
@@ -109,23 +113,50 @@ export default {
         }
       };
 
-      const selectedModel = autoSelectModel(`${subject} ${message}`);
+      // 2. Select model (use multimodal clef if images are attached, else clef-flash)
+      const modelId = images.length > 0 ? "@cf/cloudflare/clef" : "@cf/cloudflare/clef-flash";
+      const modelName = modelId.includes("clef-flash") ? "clef-flash" : "clef";
 
-      const aiDecision = await env.AI.run(selectedModel, {
+      // 3. Execute Clef Model via Workers AI
+      const aiResponse = await env.AI.run(modelId, {
+        model: modelName,
         state: state,
-        questions: DECISION_QUESTIONS
+        questions: DECISION_QUESTIONS,
+        images: images
       });
 
-      const repKey = aiDecision?.assigned_representative?.choice || "project_manager";
-      const urgencyLevel = aiDecision?.inquiry_urgency?.level ?? 1;
+      // 4. Extract answers correctly from `aiResponse.answers`
+      const answers = aiResponse?.answers || aiResponse || {};
+
+      let repKey = "project_manager";
+      if (answers.assigned_representative) {
+        if (typeof answers.assigned_representative === "string") {
+          repKey = answers.assigned_representative;
+        } else if (answers.assigned_representative.choice) {
+          repKey = answers.assigned_representative.choice;
+        }
+      }
+
+      let urgencyLevel = 1;
+      if (answers.inquiry_urgency !== undefined) {
+        if (typeof answers.inquiry_urgency === "number") {
+          urgencyLevel = Math.round(answers.inquiry_urgency);
+        } else if (answers.inquiry_urgency.level !== undefined) {
+          urgencyLevel = answers.inquiry_urgency.level;
+        } else if (answers.inquiry_urgency.score !== undefined) {
+          urgencyLevel = Math.round(answers.inquiry_urgency.score);
+        }
+      }
+
       const repInfo = REPRESENTATIVE_METADATA[repKey] || REPRESENTATIVE_METADATA.project_manager;
       const urgencyLabels = ["Low", "Standard", "High Priority", "Urgent / Blocker"];
 
+      // 5. Return clean response for Streamlit
       return new Response(
         JSON.stringify({
           success: true,
           client_name: clientName,
-          model_used: selectedModel,
+          model_used: modelId,
           routing: {
             representative_key: repKey,
             title: repInfo.title,
@@ -133,14 +164,15 @@ export default {
             icon: repInfo.icon,
             action: repInfo.action,
             response_time: repInfo.response_time,
-            priority_level: urgencyLabels[Math.min(urgencyLevel, 3)]
-          }
+            priority_level: urgencyLabels[Math.min(Math.max(urgencyLevel, 0), 3)]
+          },
+          raw_decision: aiResponse
         }),
         { status: 200, headers: CORS_HEADERS }
       );
     } catch (err) {
       return new Response(
-        JSON.stringify({ success: false, error: err.message }),
+        JSON.stringify({ success: false, error: err.message || "Failed to process inquiry" }),
         { status: 500, headers: CORS_HEADERS }
       );
     }
