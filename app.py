@@ -116,6 +116,8 @@ if submit_btn:
                     </div>
                     """, unsafe_allow_html=True)
                 else:
-                    st.error(f"Worker error ({response.status_code}): {response.text}")
+                    st.error(f"❌ Worker Error (HTTP Status {response.status_code})")
+                    st.code(response.text, language="json")
             except Exception as e:
-                st.warning(f"Could not connect to Cloudflare Worker at `{worker_url}`. Please verify your Worker URL in the sidebar.")
+                st.error(f"❌ Connection Failed: {e}")
+                st.info("Tip: Make sure the URL begins with `https://` and has no trailing spaces or typos.")
