@@ -1,0 +1,14 @@
+# Ignore worker code as requested
+worker/
+
+# Python cache & build files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+*.log
+
+# Environment files
+.env
+venv/
+.venv/
