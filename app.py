@@ -179,34 +179,34 @@ def evaluate_project_alignment(page_data: dict, worker_url: str = "") -> dict:
     indicator_count = sum(1 for w in project_indicators if w in full_text)
 
     # Step C: If Cloudflare Worker URL is available, execute Clef decision
-    if worker_url.strip() and best_sector:
+    if worker_url.strip():
         try:
             payload = {
-                "url": page_data.get("url"),
-                "state": {
-                    "title": title,
-                    "matched_sector": best_sector,
-                    "content": content[:2000]
-                }
+                "url": page_data.get("url", ""),
+                "title": title,
+                "content": content[:2500],
+                "matched_sector": best_sector or "General Industry",
+                "sector_definition": best_definition or "Commercial and industrial operations"
             }
-            worker_resp = requests.post(worker_url.strip(), json=payload, timeout=10)
+            worker_resp = requests.post(worker_url.strip(), json=payload, timeout=12)
             if worker_resp.status_code == 200:
                 worker_data = worker_resp.json()
                 if "is_project" in worker_data:
                     return {
                         "is_project": worker_data.get("is_project"),
                         "decision": worker_data.get("decision", "YES" if worker_data.get("is_project") else "NO"),
-                        "matched_sector": best_sector,
-                        "sector_definition": best_definition,
-                        "confidence": worker_data.get("confidence", 0.9),
-                        "summary": meta_desc or (content[:220] + "...")
+                        "matched_sector": worker_data.get("matched_sector") or best_sector,
+                        "sector_definition": worker_data.get("sector_definition") or best_definition,
+                        "confidence": worker_data.get("confidence", 0.90),
+                        "summary": meta_desc or (content[:220] + "..."),
+                        "worker_engine": worker_data.get("model_used", "@cf/cloudflare/clef-flash")
                     }
-        except Exception:
+        except Exception as e:
             pass  # Fall back to local sector evaluator
 
-    # Decision threshold: Must match a registered sector AND show project attributes
+    # Local fallback threshold: Must match a registered sector AND show project attributes
     is_project = (best_sector is not None) and (best_score >= 45) and (indicator_count >= 2 or best_score >= 100)
-    confidence = min(0.98, round(0.60 + (min(indicator_count, 6) * 0.05) + (min(best_score, 100) * 0.001), 2)) if is_project else 0.85
+    confidence = min(0.98, round(0.65 + (min(indicator_count, 6) * 0.05), 2)) if is_project else 0.85
 
     return {
         "is_project": is_project,
@@ -214,7 +214,8 @@ def evaluate_project_alignment(page_data: dict, worker_url: str = "") -> dict:
         "matched_sector": best_sector if is_project else None,
         "sector_definition": best_definition if is_project else None,
         "confidence": confidence,
-        "summary": meta_desc or (content[:220] + "...")
+        "summary": meta_desc or (content[:220] + "..."),
+        "worker_engine": "Local Sector Engine"
     }
 
 # -------------------------------------------------------------
@@ -248,7 +249,7 @@ if submit_btn:
             else:
                 result = evaluate_project_alignment(page_data, worker_url=worker_url)
                 
-                is_proj = result.get("is_project", False)
+                engine_used = result.get("worker_engine", "Local Sector Engine")
                 
                 if is_proj:
                     st.markdown(f"""
@@ -262,9 +263,14 @@ if submit_btn:
                                 <b>Sector Definition:</b> {result.get('sector_definition')}
                             </p>
                         </div>
-                        <p style="font-size: 0.85rem; color: #166534; margin-top: 0.75rem;">
-                            <b>Confidence:</b> {int(result.get('confidence', 0.85) * 100)}%
-                        </p>
+                        <div style="margin-top: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.9rem; color: #166534; font-weight: 600;">
+                                <b>Confidence:</b> {int(result.get('confidence', 0.85) * 100)}%
+                            </span>
+                            <span style="font-size: 0.8rem; color: #64748B; background: #E2E8F0; padding: 0.2rem 0.6rem; border-radius: 6px;">
+                                ⚡ Engine: {engine_used}
+                            </span>
+                        </div>
                     </div>
                     """, unsafe_allow_html=True)
                 else:
@@ -274,7 +280,12 @@ if submit_btn:
                         <h3 style="color: #B91C1C; margin: 0.5rem 0;">{page_data.get('title') or 'Non-Project Webpage'}</h3>
                         <p style="color: #374151;">{result.get('summary', '')}</p>
                         <p style="color: #7F1D1D; margin-top: 0.5rem; font-size: 0.95rem;">
-                            The analyzed URL does not describe an active project scope or does not align with any of our <b>{len(SECTORS)}</b> registered company sectors.
+                            The analyzed webpage does not describe an active project scope or does not align with any of our <b>{len(SECTORS)}</b> registered company sectors.
                         </p>
+                        <div style="margin-top: 0.75rem; text-align: right;">
+                            <span style="font-size: 0.8rem; color: #64748B; background: #E2E8F0; padding: 0.2rem 0.6rem; border-radius: 6px;">
+                                ⚡ Engine: {engine_used}
+                            </span>
+                        </div>
                     </div>
                     """, unsafe_allow_html=True)
