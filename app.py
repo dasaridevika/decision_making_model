@@ -273,31 +273,41 @@ if submit_btn:
                 engine_used = result.get("worker_engine", "Local Sector Engine")
                 reasoning_text = result.get("reasoning", "")
                 
+                import textwrap
+                
+                title_text = page_data.get('title') or 'Project Analysis'
+                summary_text = meta_desc or result.get('summary') or (content[:220] + '...')
+                matched_sec = result.get('matched_sector') or ''
+                sec_def = result.get('sector_definition') or ''
+                conf_pct = int(result.get('confidence', 0.85) * 100)
+                
                 if is_proj:
-                    st.markdown(f"""
-                    <div class="yes-card">
-                        <div class="badge-yes">✅ YES — This is a Project</div>
-                        <h3 style="color: #15803D; margin: 0.5rem 0;">{page_data.get('title') or 'Project Identified'}</h3>
-                        <p style="color: #374151;">{result.get('summary', '')}</p>
-                        <div class="sector-info">
-                            <b>🏷️ Matched Company Sector:</b> {result.get('matched_sector')}
-                            <p style="margin: 0.35rem 0 0 0; color: #4B5563; font-size: 0.95rem;">
-                                <b>Sector Definition:</b> {result.get('sector_definition')}
-                            </p>
-                        </div>
-                        <p style="font-size: 0.85rem; color: #166534; margin-top: 0.75rem; font-weight: 600;">
-                            <b>Confidence:</b> {int(result.get('confidence', 0.85) * 100)}%
-                        </p>
-                    </div>
-                    """, unsafe_allow_html=True)
+                    card_html = textwrap.dedent(f"""
+<div class="yes-card">
+    <div class="badge-yes">✅ YES — This is a Project</div>
+    <h3 style="color: #15803D; margin: 0.5rem 0;">{title_text}</h3>
+    <p style="color: #374151;">{summary_text}</p>
+    <div class="sector-info">
+        <b>🏷️ Matched Company Sector:</b> {matched_sec}
+        <p style="margin: 0.35rem 0 0 0; color: #4B5563; font-size: 0.95rem;">
+            <b>Sector Definition:</b> {sec_def}
+        </p>
+    </div>
+    <p style="font-size: 0.85rem; color: #166534; margin-top: 0.75rem; font-weight: 600;">
+        <b>Confidence:</b> {conf_pct}%
+    </p>
+</div>
+""")
+                    st.markdown(card_html, unsafe_allow_html=True)
                 else:
-                    st.markdown(f"""
-                    <div class="no-card">
-                        <div class="badge-no">❌ NO — Not a Recognized Sector Project</div>
-                        <h3 style="color: #B91C1C; margin: 0.5rem 0;">{page_data.get('title') or 'Non-Project Webpage'}</h3>
-                        <p style="color: #374151;">{result.get('summary', '')}</p>
-                        <p style="color: #7F1D1D; margin-top: 0.5rem; font-size: 0.95rem;">
-                            The analyzed webpage does not describe an active project scope or does not align with any of our <b>{len(SECTORS)}</b> registered company sectors.
-                        </p>
-                    </div>
-                    """, unsafe_allow_html=True)
+                    card_html = textwrap.dedent(f"""
+<div class="no-card">
+    <div class="badge-no">❌ NO — Not a Recognized Sector Project</div>
+    <h3 style="color: #B91C1C; margin: 0.5rem 0;">{title_text}</h3>
+    <p style="color: #374151;">{summary_text}</p>
+    <p style="color: #7F1D1D; margin-top: 0.5rem; font-size: 0.95rem;">
+        The analyzed webpage does not describe an active project scope or does not align with any of our <b>{len(SECTORS)}</b> registered company sectors.
+    </p>
+</div>
+""")
+                    st.markdown(card_html, unsafe_allow_html=True)
