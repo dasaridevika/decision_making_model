@@ -276,7 +276,7 @@ if submit_btn:
                 import textwrap
                 
                 title_text = page_data.get('title') or 'Project Analysis'
-                summary_text = meta_desc or result.get('summary') or (content[:220] + '...')
+                summary_text = page_data.get('meta_description') or result.get('summary') or (page_data.get('content', '')[:220] + '...')
                 matched_sec = result.get('matched_sector') or ''
                 sec_def = result.get('sector_definition') or ''
                 conf_pct = int(result.get('confidence', 0.85) * 100)
