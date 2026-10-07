@@ -1,13 +1,10 @@
 /**
- * Cloudflare Worker: Clef Project & Sector Validator
- * Model: @cf/cloudflare/clef-flash / @cf/cloudflare/clef
+ * Cloudflare Worker: Multi-Model Project & Sector Alignment Decision Engine
  * 
- * Purpose:
- * Analyzes webpage URL context to determine:
- * 1. Is this an actual project (facility, plant, capacity deal, construction)?
- * 2. Does it align with the registered industry sector list?
- * 
- * Returns: "YES" (if it is a project) or "NO" (if not)
+ * Integrated Models:
+ * 1. @cf/meta/llama-3-8b-instruct    -> Generative LLM for in-depth text context evaluation & entity extraction
+ * 2. @cf/cloudflare/clef-flash       -> Fast Clef Decision Model for strict YES/NO binary decision
+ * 3. @cf/cloudflare/clef             -> Multimodal Clef Decision Model for image & complex multi-modal evaluation
  */
 
 const CORS_HEADERS = {
@@ -39,7 +36,7 @@ function parseBoolAnswer(ans) {
   return false;
 }
 
-// Fetch & extract visible clean text from URL
+// Helper: Extract clean text from URL using standard Browser User-Agent header
 async function fetchAndCleanUrl(url) {
   try {
     let target = url.trim();
@@ -82,8 +79,12 @@ export default {
       return new Response(
         JSON.stringify({
           status: "online",
-          engine: "Cloudflare Clef Project Decision Validator",
-          model: "@cf/cloudflare/clef-flash"
+          engine: "Cloudflare Clef & LLM Project Decision System",
+          models: {
+            llm: "@cf/meta/llama-3-8b-instruct",
+            clef_flash: "@cf/cloudflare/clef-flash",
+            clef_multimodal: "@cf/cloudflare/clef"
+          }
         }),
         { status: 200, headers: CORS_HEADERS }
       );
@@ -96,51 +97,81 @@ export default {
       let title = body.title || body.state?.title || "";
       let content = body.content || body.state?.content || "";
       let sector = body.matched_sector || body.state?.matched_sector || "General Industry";
-      let definition = body.sector_definition || body.state?.sector_definition || "Commercial and industrial facilities";
+      let definition = body.sector_definition || body.state?.sector_definition || "Commercial and industrial operations";
+      let images = body.images || [];
 
       if (!url && !content) {
         return new Response(
-          JSON.stringify({ error: "Missing project URL or webpage content." }),
+          JSON.stringify({ error: "Missing project URL or content payload." }),
           { status: 400, headers: CORS_HEADERS }
         );
       }
 
-      // If content was not pre-extracted, fetch it directly in the Worker
+      // If webpage text is not provided, fetch and extract visible HTML text
       if (!content && url) {
         const fetched = await fetchAndCleanUrl(url);
         title = title || fetched.title;
         content = fetched.content;
       }
 
-      // -------------------------------------------------------------
-      // Execute Cloudflare Clef Decision Model
-      // -------------------------------------------------------------
+      // -----------------------------------------------------------------------
+      // STAGE 1: LLM Context Evaluation (@cf/meta/llama-3-8b-instruct)
+      // Evaluates text context, extracts project activities, and summarizes key scope
+      // -----------------------------------------------------------------------
+      let evaluatedSummary = "";
+      try {
+        const llmPrompt = `Analyze the following webpage text. In 1-2 concise sentences, summarize whether this describes a real-world commercial/industrial project, facility build, deal, or capacity expansion in the sector '${sector}':
+Title: ${title}
+Content: ${content.slice(0, 2000)}`;
+
+        const llmResponse = await env.AI.run("@cf/meta/llama-3-8b-instruct", {
+          prompt: llmPrompt,
+          max_tokens: 150,
+          temperature: 0.1
+        });
+        evaluatedSummary = llmResponse.response || llmResponse.text || "";
+      } catch (e) {
+        evaluatedSummary = title || "Webpage context extracted for evaluation.";
+      }
+
+      // -----------------------------------------------------------------------
+      // STAGE 2: Clef Decision Engine
+      // Model selection:
+      // - @cf/cloudflare/clef (Multimodal) when images are present
+      // - @cf/cloudflare/clef-flash (Fast) for text-only decision evaluation
+      // -----------------------------------------------------------------------
+      const selectedClefModel = images.length > 0 ? "@cf/cloudflare/clef" : "@cf/cloudflare/clef-flash";
+      const clefModelName = selectedClefModel.includes("clef-flash") ? "clef-flash" : "clef";
+
       const clefQuestions = {
         is_project: {
           type: "noul",
-          instructions: `Analyze this webpage context. Determine whether it describes an actual, real-world project, commercial facility development, capacity deal (e.g. MW/GW/tons), power contract, or infrastructure construction in the '${sector}' sector (Definition: ${definition}).`,
+          instructions: `Determine whether the webpage content represents a real-world commercial/industrial project, facility development, capacity deal (e.g. MW/GW/tons), power contract, or infrastructure construction in the '${sector}' sector (Definition: ${definition}).`,
           criteria: {
-            true: `The webpage explicitly describes a real project, facility, commercial deal, or operational development aligned with ${sector}.`,
-            false: `The webpage is general news, celebrity/movie entertainment, a personal blog, or does not represent a real project in this sector.`
+            true: `The text explicitly describes a real project, facility, capacity deal, power agreement, construction, or operational development related to the ${sector} sector.`,
+            false: "The text is an unrelated article, entertainment news, personal blog, general discussion, or does not describe a real sector project."
           }
         }
       };
 
-      const aiResponse = await env.AI.run("@cf/cloudflare/clef-flash", {
-        model: "clef-flash",
+      const clefResponse = await env.AI.run(selectedClefModel, {
+        model: clefModelName,
         state: {
           url: url,
           title: title,
           sector: sector,
           definition: definition,
-          webpage_content: (title + "\n" + content).slice(0, 3000)
+          llm_evaluated_summary: evaluatedSummary,
+          webpage_content: (title + "\n" + content).slice(0, 2500)
         },
-        questions: clefQuestions
+        questions: clefQuestions,
+        images: images
       });
 
-      const answers = aiResponse?.answers || aiResponse || {};
+      const answers = clefResponse?.answers || clefResponse || {};
       const isProject = parseBoolAnswer(answers.is_project);
 
+      // Return unified decision response
       return new Response(
         JSON.stringify({
           success: true,
@@ -149,9 +180,13 @@ export default {
           matched_sector: isProject ? sector : null,
           sector_definition: isProject ? definition : null,
           confidence: isProject ? 0.95 : 0.85,
-          title: title || "Webpage Analysis",
-          model_used: "@cf/cloudflare/clef-flash",
-          raw_decision: aiResponse
+          title: title || "Project Analysis",
+          summary: evaluatedSummary || title,
+          models_used: {
+            context_evaluator: "@cf/meta/llama-3-8b-instruct",
+            decision_engine: selectedClefModel
+          },
+          raw_decision: clefResponse
         }),
         { status: 200, headers: CORS_HEADERS }
       );
