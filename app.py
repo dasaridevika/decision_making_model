@@ -134,63 +134,40 @@ def extract_url_context(url: str) -> dict:
         return {"success": False, "error": str(e)}
 
 # -------------------------------------------------------------
-# 3. Decision Evaluation Logic
+# 3. Decision Evaluation via Cloudflare Worker AI (Zero Hardcoded Rules)
 # -------------------------------------------------------------
-def evaluate_project_alignment(page_data: dict, worker_url: str = "") -> dict:
-    text_corpus = f"{page_data.get('title', '')} {page_data.get('meta_description', '')} {page_data.get('content', '')}".lower()
-    
-    # Check if a Worker URL is available
-    if worker_url.strip():
-        try:
-            # Send extracted context to Cloudflare Worker AI running Clef
-            payload = {
-                "url": page_data.get("url"),
-                "state": {
-                    "title": page_data.get("title"),
-                    "description": page_data.get("meta_description"),
-                    "content": page_data.get("content")[:2000]
-                }
+def evaluate_project_alignment(page_data: dict, worker_url: str) -> dict:
+    if not worker_url.strip():
+        return {
+            "is_project": False,
+            "decision": "NO",
+            "summary": "Cloudflare Worker URL is not configured. Please add CLOUDFLARE_WORKER_URL to Streamlit secrets."
+        }
+
+    try:
+        payload = {
+            "url": page_data.get("url"),
+            "state": {
+                "title": page_data.get("title"),
+                "description": page_data.get("meta_description"),
+                "content": page_data.get("content", "")[:2500]
             }
-            worker_resp = requests.post(worker_url.strip(), json=payload, timeout=12)
-            if worker_resp.status_code == 200:
-                return worker_resp.json()
-        except Exception:
-            pass  # Fall back to local sector evaluator
-
-    # Local Sector Alignment Evaluator (using sector_definitions.csv)
-    matched_sector = None
-    matched_definition = ""
-    max_score = 0
-
-    for sector_name, definition in SECTORS.items():
-        # Check sector keywords in extracted text
-        sector_words = [w.lower() for w in re.findall(r"\w+", sector_name) if len(w) > 3]
-        if not sector_words:
-            continue
-        
-        matches = sum(1 for w in sector_words if w in text_corpus)
-        score = matches / len(sector_words)
-        
-        if score > max_score and score >= 0.5:
-            max_score = score
-            matched_sector = sector_name
-            matched_definition = definition
-
-    # Check if text shows project characteristics (facilities, installations, capacity, location, commissioning)
-    project_signals = ["project", "plant", "facility", "capacity", "mw", "installed", "construction", "location", "commissioned", "developed", "phase", "infrastructure"]
-    project_score = sum(1 for w in project_signals if w in text_corpus)
-
-    is_project = (matched_sector is not None) and (project_score >= 2 or max_score >= 0.7)
-    confidence = min(0.95, round(0.5 + (max_score * 0.3) + (min(project_score, 5) * 0.05), 2)) if is_project else 0.85
-
-    return {
-        "is_project": is_project,
-        "decision": "YES" if is_project else "NO",
-        "confidence": confidence,
-        "matched_sector": matched_sector if is_project else None,
-        "sector_definition": matched_definition if is_project else None,
-        "summary": page_data.get("meta_description") or (page_data.get("content", "")[:200] + "...")
-    }
+        }
+        resp = requests.post(worker_url.strip(), json=payload, timeout=15)
+        if resp.status_code == 200:
+            return resp.json()
+        else:
+            return {
+                "is_project": False,
+                "decision": "NO",
+                "summary": f"Worker returned status {resp.status_code}: {resp.text}"
+            }
+    except Exception as e:
+        return {
+            "is_project": False,
+            "decision": "NO",
+            "summary": f"Connection error to Cloudflare Worker: {str(e)}"
+        }
 
 # -------------------------------------------------------------
 # 4. Read Worker URL Silently from Streamlit Secrets
