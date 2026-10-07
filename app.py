@@ -205,6 +205,12 @@ def evaluate_project_alignment(page_data: dict, worker_url: str = "") -> dict:
             if worker_resp.status_code == 200:
                 worker_data = worker_resp.json()
                 if "is_project" in worker_data:
+                    models_info = worker_data.get("models_used")
+                    if isinstance(models_info, dict):
+                        engine_label = f"Llama-3 (Verifier) ➔ {models_info.get('stage_2_decision', '@cf/cloudflare/clef-flash')} (Decision)"
+                    else:
+                        engine_label = worker_data.get("model_used", "Clef Decision Engine (@cf/cloudflare/clef-flash)")
+
                     return {
                         "is_project": worker_data.get("is_project"),
                         "decision": worker_data.get("decision", "YES" if worker_data.get("is_project") else "NO"),
@@ -213,7 +219,7 @@ def evaluate_project_alignment(page_data: dict, worker_url: str = "") -> dict:
                         "confidence": worker_data.get("confidence", 0.95),
                         "summary": worker_data.get("summary") or meta_desc or (content[:220] + "..."),
                         "reasoning": worker_data.get("reasoning", ""),
-                        "worker_engine": worker_data.get("model_used", "@cf/meta/llama-3-8b-instruct")
+                        "worker_engine": engine_label
                     }
         except Exception as e:
             pass  # Fall back to local sector evaluator
