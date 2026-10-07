@@ -274,7 +274,6 @@ if submit_btn:
                 reasoning_text = result.get("reasoning", "")
                 
                 if is_proj:
-                    reasoning_html = f"<p style='color: #047857; margin-top: 0.5rem; font-size: 0.9rem;'><b>💡 LLM Verification:</b> {reasoning_text}</p>" if reasoning_text else ""
                     st.markdown(f"""
                     <div class="yes-card">
                         <div class="badge-yes">✅ YES — This is a Project</div>
@@ -285,16 +284,10 @@ if submit_btn:
                             <p style="margin: 0.35rem 0 0 0; color: #4B5563; font-size: 0.95rem;">
                                 <b>Sector Definition:</b> {result.get('sector_definition')}
                             </p>
-                            {reasoning_html}
                         </div>
-                        <div style="margin-top: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-size: 0.9rem; color: #166534; font-weight: 600;">
-                                <b>Confidence:</b> {int(result.get('confidence', 0.85) * 100)}%
-                            </span>
-                            <span style="font-size: 0.8rem; color: #64748B; background: #E2E8F0; padding: 0.2rem 0.6rem; border-radius: 6px;">
-                                ⚡ Engine: {engine_used}
-                            </span>
-                        </div>
+                        <p style="font-size: 0.85rem; color: #166534; margin-top: 0.75rem; font-weight: 600;">
+                            <b>Confidence:</b> {int(result.get('confidence', 0.85) * 100)}%
+                        </p>
                     </div>
                     """, unsafe_allow_html=True)
                 else:
@@ -306,10 +299,5 @@ if submit_btn:
                         <p style="color: #7F1D1D; margin-top: 0.5rem; font-size: 0.95rem;">
                             The analyzed webpage does not describe an active project scope or does not align with any of our <b>{len(SECTORS)}</b> registered company sectors.
                         </p>
-                        <div style="margin-top: 0.75rem; text-align: right;">
-                            <span style="font-size: 0.8rem; color: #64748B; background: #E2E8F0; padding: 0.2rem 0.6rem; border-radius: 6px;">
-                                ⚡ Engine: {engine_used}
-                            </span>
-                        </div>
                     </div>
                     """, unsafe_allow_html=True)
