@@ -1,6 +1,6 @@
 /**
  * Cloudflare Worker: Clef Decision Engine
- * Model: @cf/cloudflare/clef-flash / @cf/cloudflare/clef
+ * Models: @cf/cloudflare/clef-flash / @cf/cloudflare/clef
  * 
  * Supports two operational modes:
  * 1. Project & Sector Alignment Validator (Verifies URL content against industry sectors)
@@ -118,20 +118,29 @@ async function fetchAndCleanUrl(url) {
   }
 }
 
-// Helper to normalize Clef answers
+// Universal parser for Clef boolean/noul answers
 function parseBoolAnswer(ans) {
+  if (ans === undefined || ans === null) return false;
   if (typeof ans === "boolean") return ans;
-  if (typeof ans === "number") return ans >= 0.5;
-  if (typeof ans === "string") return ans.toLowerCase() === "true" || ans.toLowerCase() === "yes";
-  if (ans && typeof ans === "object") {
+  if (typeof ans === "number") return ans >= 0.45;
+  if (typeof ans === "string") {
+    const s = ans.trim().toLowerCase();
+    return s === "true" || s === "yes" || s === "1";
+  }
+  if (typeof ans === "object") {
     if (typeof ans.value === "boolean") return ans.value;
-    if (typeof ans.value === "number") return ans.value >= 0.5;
+    if (typeof ans.value === "number") return ans.value >= 0.45;
     if (typeof ans.value === "string") return ans.value.toLowerCase() === "true" || ans.value.toLowerCase() === "yes";
     if (typeof ans.choice === "string") return ans.choice.toLowerCase() === "true" || ans.choice.toLowerCase() === "yes";
+    if (typeof ans.answer === "string") return ans.answer.toLowerCase() === "true" || ans.answer.toLowerCase() === "yes";
+    if (typeof ans.result === "string") return ans.result.toLowerCase() === "true" || ans.result.toLowerCase() === "yes";
+    if (typeof ans.result === "boolean") return ans.result;
+    if (typeof ans.confidence === "number") return ans.confidence >= 0.45;
   }
   return false;
 }
 
+// Universal parser for Clef score answers
 function parseScoreAnswer(ans) {
   if (typeof ans === "number") return ans;
   if (ans && typeof ans === "object") {
@@ -171,7 +180,7 @@ export default {
         let title = body.title || body.state?.title || "";
         let content = body.content || body.state?.content || "";
         let sector = body.matched_sector || body.state?.matched_sector || "General Infrastructure";
-        let definition = body.sector_definition || body.state?.sector_definition || "Industrial / commercial facility";
+        let definition = body.sector_definition || body.state?.sector_definition || "Commercial and industrial facilities";
 
         // Fetch webpage text if not provided in payload
         if (!content && url) {
@@ -182,30 +191,22 @@ export default {
 
         // Questions for Clef Model
         const projectQuestions = {
-          is_real_project: {
+          is_sector_project: {
             type: "noul",
-            instructions: "Evaluate the text and determine whether it describes a real-world project, construction, facility development, plant expansion, or infrastructure contract.",
+            instructions: `Evaluate the webpage title and content. Determine whether it describes a legitimate, real-world project, commercial contract, deal, facility development, capacity expansion, or infrastructure initiative in the '${sector}' industry sector (Definition: ${definition}).`,
             criteria: {
-              true: "The text describes an actual project, development, operational facility, or infrastructure initiative with specific capacity, location, investment, or enterprise details.",
-              false: "The text is an unrelated article, generic overview, educational tutorial, product ad, or does not describe an active project."
-            }
-          },
-          aligns_with_sector: {
-            type: "noul",
-            instructions: `Determine if the described project belongs to or aligns with the sector '${sector}' (Definition: ${definition}).`,
-            criteria: {
-              true: `The project operations and scope align directly with the ${sector} industry sector definition.`,
-              false: `The project belongs to an entirely different industry or contradicts the ${sector} definition.`
+              true: `The text explicitly describes a real project, facility, capacity deal, power agreement, construction, or operational development related to the ${sector} sector.`,
+              false: "The text is an unrelated article, entertainment news, personal blog, general discussion, or does not describe a real sector project."
             }
           },
           confidence_score: {
             type: "score",
-            instructions: "Rate your confidence on a 4-level scale that this is a verified real project correctly classified under this sector.",
+            instructions: "Rate your confidence on a 4-level scale that this is a verified real project matching this sector.",
             criteria: [
-              "Level 0 (Low): Weak evidence, uncertain project status, or questionable sector alignment.",
-              "Level 1 (Moderate): Plausible project mention, but limited operational details.",
-              "Level 2 (High): Verified project with clear commercial scale, location, or capacity matching sector.",
-              "Level 3 (Very High): Definite project development with concrete investment, capacity (e.g. MW, GW, tons), timeline, and perfect sector alignment."
+              "Level 0 (Low): Minimal evidence of a real project.",
+              "Level 1 (Moderate): Mentions a facility or initiative, but limited details.",
+              "Level 2 (High): Verified project with clear commercial scale, capacity, or location matching the sector.",
+              "Level 3 (Very High): Definite major project or contract with concrete capacity (e.g., MW, GW, tons), location, and perfect sector alignment."
             ]
           }
         };
@@ -218,21 +219,18 @@ export default {
             page_title: title,
             matched_sector: sector,
             sector_definition: definition,
-            content_sample: content.slice(0, 2500)
+            content_sample: (title + "\n" + content).slice(0, 2500)
           },
           questions: projectQuestions
         });
 
         const answers = clefResult?.answers || clefResult || {};
 
-        const isRealProject = parseBoolAnswer(answers.is_real_project);
-        const alignsWithSector = parseBoolAnswer(answers.aligns_with_sector);
+        const isProject = parseBoolAnswer(answers.is_sector_project ?? answers.is_real_project ?? answers.is_project);
         const scoreLevel = parseScoreAnswer(answers.confidence_score);
 
-        const isProject = isRealProject && alignsWithSector;
-
-        // Confidence calculation based on Clef Score (Level 0 to 3)
-        const confidenceMap = [0.65, 0.78, 0.90, 0.96];
+        // Map score to confidence percentage
+        const confidenceMap = [0.72, 0.82, 0.92, 0.97];
         const confidence = confidenceMap[Math.min(Math.max(scoreLevel, 0), 3)];
 
         return new Response(
@@ -243,8 +241,6 @@ export default {
             matched_sector: sector,
             sector_definition: definition,
             confidence: confidence,
-            is_real_project: isRealProject,
-            aligns_with_sector: alignsWithSector,
             confidence_level: scoreLevel,
             title: title || "Project Analysis",
             model_used: "@cf/cloudflare/clef-flash",
