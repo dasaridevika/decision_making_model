@@ -1,0 +1,463 @@
+Primary Sector,Definition
+Acetic Acid Plant,"A facility that produces acetic acid, a key industrial chemical used as a solvent and in manufacturing vinegar, plastics, and synthetic fibers."
+Acetone Plant,"A facility that manufactures acetone, a volatile solvent widely used in pharmaceuticals, cosmetics, and chemical synthesis."
+Acrylic Fiber Plant,"A production facility that manufactures acrylic fibers, synthetic textiles made from polyacrylonitrile used in clothing, carpets, and upholstery."
+Acrylic Resin Plant,"A plant that produces acrylic resins, polymer materials used in coatings, adhesives, and sealants for industrial and consumer applications."
+Acrylonitrile Butadiene Styrene (ABS) Plant,"A manufacturing facility that produces ABS, a thermoplastic polymer used in automotive parts, electronics housings, and consumer goods."
+Acrylonitrile Plant,"A chemical plant that manufactures acrylonitrile, a monomer used in producing acrylic fibers, ABS plastic, and synthetic rubber."
+Active Pharmaceutical Ingredients (API),A facility that synthesizes or extracts the biologically active components of pharmaceutical drugs used in medicinal formulations.
+Adhesives and Sealants Plant,"A manufacturing plant producing bonding and sealing compounds for construction, automotive, packaging, and industrial applications."
+Adipic Acid Plant,"A facility producing adipic acid, a key precursor for nylon-6,6 and polyurethane manufacturing, primarily used in textiles and plastics."
+Administrative Building,"A building used for managing organizational, governmental, or corporate operations, housing offices and administrative personnel."
+Agricultural Waste Management,"A facility or system dedicated to the collection, treatment, and disposal of waste generated from farming and agricultural activities."
+Agriculture and Forestry Building,"Structures supporting agricultural production and forest management, including barns, storage units, and operational offices."
+Air Separation Unit (ASU),"An industrial plant that separates atmospheric air into its primary components—oxygen, nitrogen, and argon—for industrial and medical use."
+Aircraft Manufacturing Plant,"A large-scale manufacturing facility where commercial, military, or private aircraft are assembled, tested, and delivered."
+Airport Runway,A paved or prepared strip of land at an airport used for the takeoff and landing of aircraft.
+Airport Terminal,"The building at an airport where passengers board and disembark from flights and where ticketing, security, and transit services are provided."
+Aluminium Plant,"A facility that smelts bauxite ore or refines alumina into aluminum metal for use in aerospace, construction, and packaging industries."
+Ammonia Plant,"A chemical plant that manufactures ammonia via the Haber-Bosch process, primarily used in fertilizers, refrigerants, and chemical production."
+Ammonium Nitrate Plant,"A facility producing ammonium nitrate, widely used as a nitrogen fertilizer in agriculture and as a component in explosives."
+Ammonium Sulfate Plant,"A plant that produces ammonium sulfate fertilizer, a by-product of coking or caprolactam production, providing nitrogen and sulfur to soils."
+Amusement Facility,"A recreational venue offering rides, games, entertainment attractions, or themed experiences for public enjoyment."
+Aniline Plant,"A chemical plant that produces aniline, a key precursor for polyurethane foams, dyes, pharmaceuticals, and rubber chemicals."
+Animal Shelter,"A facility providing temporary housing, care, and adoption services for homeless, stray, or abandoned animals."
+Apron,"The paved area of an airport where aircraft are parked, loaded, unloaded, refueled, and undergo maintenance."
+Armoury,"A secure facility used for the storage, maintenance, and distribution of weapons, ammunition, and military equipment."
+Assembly Plant,"A manufacturing facility where components or parts are put together to produce finished goods such as vehicles, electronics, or machinery."
+Athletic Track,A running track facility designed for track and field competitions and athletic training.
+Automobile Manufacturing Unit,"A plant where motor vehicles are assembled from components including engines, chassis, and bodywork on a production line."
+Barrack,A building or set of buildings used to house military personnel on a permanent or temporary basis.
+Basic Metal,"A facility involved in the smelting and refining of common metals such as iron, steel, copper, and aluminum from raw ores."
+Battery Anode Material Production Plant,"A facility manufacturing anode materials (e.g., graphite, silicon) used in the negative electrode of rechargeable battery cells."
+Battery Casing and Packaging Production Plant,"A plant producing protective enclosures and packaging systems for battery cells, modules, and packs."
+Battery Cathode Material Production Plant,"A facility manufacturing cathode active materials (e.g., NMC, LFP) used in the positive electrode of lithium-ion and other battery types."
+Battery Electrolyte Production Plant,A plant producing liquid or solid electrolyte solutions that enable ion transport between the anode and cathode in battery cells.
+Battery Energy Storage,"A system or facility that stores electrical energy in batteries for grid stabilization, renewable energy integration, or backup power."
+Battery Management System (BMS) Manufacturing Plant,"A facility producing electronic systems that monitor, control, and protect battery packs from overcharging, overheating, and failure."
+Battery Recycling Facility,"A plant that recovers valuable materials such as lithium, cobalt, and nickel from end-of-life batteries for reuse in new cells."
+Battery Separator Production Plant,"A facility producing thin, porous membranes that electrically isolate the anode and cathode within a battery cell while allowing ion flow."
+Benzene Plant,"A chemical plant that produces benzene, a fundamental aromatic hydrocarbon used as a precursor for plastics, resins, and synthetic fibers."
+Berth,"A designated docking location at a port or marina where vessels can moor for loading, unloading, or berthing."
+Beverage Manufacturing Facility,"A plant that produces alcoholic or non-alcoholic beverages including soft drinks, juices, beer, wine, and spirits."
+Biodiesel Plants,"A facility that produces biodiesel fuel by chemically converting vegetable oils, animal fats, or recycled cooking oils through transesterification."
+Bioethanol Plants,A facility that ferments and distills sugar or starch-based biomass crops to produce bioethanol for use as a transportation fuel or blend.
+Biogas Plants,An anaerobic digestion facility that converts organic waste into biogas (methane and CO2) for energy generation and use as renewable fuel.
+Biogas Power Plant,A power generation facility that combusts biogas produced from organic waste or biomass to generate electricity and heat.
+Biological Waste Treatment Facility,A facility that uses biological processes such as composting or anaerobic digestion to treat and stabilize organic or biological waste streams.
+Biomass Power Plant,"A power plant that generates electricity or heat by burning biomass fuels such as wood chips, agricultural residues, or energy crops."
+Biomethane Plants,A facility that upgrades raw biogas to biomethane (renewable natural gas) by removing CO2 and impurities for grid injection or vehicle use.
+Biopharmaceutical Production,"A facility that manufactures biological medicines derived from living cells, including vaccines, monoclonal antibodies, and recombinant proteins."
+Bridge,"A structure built to span physical obstacles such as rivers, valleys, or roads to allow passage of vehicles, pedestrians, or trains."
+Bulk Drug Manufacturing,A large-scale facility producing bulk active pharmaceutical substances prior to formulation into final dosage forms.
+Bungalow,"A single-story residential dwelling, typically detached, with a low-pitched roof and simple layout."
+Bus Terminal,"A transportation hub where buses arrive, depart, and transfer passengers, providing ticketing, waiting areas, and operational facilities."
+Butadiene Plant,"A chemical facility that produces butadiene, a key monomer used in synthetic rubber, nylon, and ABS plastic manufacturing."
+Butane Isomerization Unit,"A refinery unit that converts normal butane to isobutane, increasing its value as a blending component for gasoline and alkylation feed."
+Cable Laying Vessel (CLV),"A specialized ship designed to install submarine cables on the seabed for telecommunications, power, or data transmission purposes."
+Calcium Ammonium Nitrate Plant,"A facility producing calcium ammonium nitrate, a nitrogen fertilizer that also reduces soil acidity compared to pure ammonium nitrate."
+Calcium Carbide Plant,"A plant that produces calcium carbide through the reaction of lime and coke in an electric arc furnace, used to generate acetylene gas."
+Carbon - Capture,A facility or system that captures CO2 emissions from industrial processes or power plants before they are released into the atmosphere.
+Carbon - Capture & Storage,An integrated system combining CO2 capture from emission sources with long-term geological storage to mitigate greenhouse gas emissions.
+Carbon - Full Chain,"A comprehensive carbon management system encompassing capture, transportation, and storage of CO2 in a single integrated project."
+Carbon - Storage,A facility or geological site designated for the permanent sequestration of captured CO2 underground to prevent atmospheric release.
+Carbon - Transport,Infrastructure such as pipelines or ships used to move captured CO2 from emission sources to storage or utilization sites.
+Carbon - Transport & Storage (T&S),Combined infrastructure providing both transportation and permanent underground storage of captured CO2 emissions.
+Carbon Black Plant,"A facility producing carbon black, a fine powder used as a reinforcing agent in tires, inks, coatings, and plastics."
+Carbon Capture and Utilization (CCU),"A facility that captures CO2 emissions and converts them into valuable products such as fuels, chemicals, or building materials."
+Carbon Dioxide (CO2) Plant,"A plant that produces or purifies CO2 for use in food and beverage carbonation, industrial processes, and enhanced oil recovery."
+Casino,"A commercial entertainment facility offering gambling activities including card games, slot machines, and sports betting."
+Catalysts Production Facility,"A plant that manufactures chemical catalysts used to accelerate reactions in petroleum refining, chemical synthesis, and environmental control."
+Catalytic Reforming Unit,A refinery unit that converts low-octane naphtha into high-octane gasoline blending components and aromatic chemicals using a catalyst.
+Causeway,"A raised road or railway built across low or wet ground, typically supported on embankments or bridges to connect land areas."
+Cement Plant,"A large industrial facility that produces cement by processing limestone, clay, and other raw materials through calcination and grinding."
+Channel,"An artificial or natural waterway used for irrigation, drainage, navigation, or water supply purposes."
+Chemical Recycling Plant,A facility that breaks down plastic or chemical waste into monomers or feedstocks for reuse in manufacturing new chemicals or polymers.
+Chemical Refinery,"A processing plant that purifies, refines, or upgrades chemical feedstocks into higher-value products through various chemical processes."
+Chemical Waste Treatment Facility,"A facility that treats hazardous or non-hazardous chemical waste through physical, chemical, or thermal processes before disposal."
+Chlor-Alkali Plant,"A chemical plant that produces chlorine and sodium hydroxide (caustic soda) through electrolysis of brine, essential for PVC and other chemicals."
+Church,"A place of Christian worship and community gathering for religious ceremonies, prayer, and pastoral activities."
+Cinema,A commercial facility equipped with projection and sound systems for showing movies to a paying audience.
+Civic Center,"A public building or complex housing government offices, community services, and spaces for public meetings and events."
+Coal Power Plant,"A thermal power station that burns coal to generate steam, which drives turbines to produce electricity."
+Cold Storage Plant,"A temperature-controlled warehouse facility used to preserve perishable goods such as food, pharmaceuticals, and chemicals."
+College,"A post-secondary educational institution offering undergraduate degree programs, diplomas, or vocational qualifications."
+Communication Antenna Tower,"A tall structure supporting antennas for broadcasting, telecommunications, or data transmission across radio or microwave frequencies."
+Communication Cable Tunnel,"An underground tunnel housing cables for telecommunications, fiber optic, or data transmission infrastructure."
+Composting Facility,A facility that processes organic waste through aerobic decomposition to produce compost for agricultural or landscaping applications.
+Compressed-Air Energy Storage (CAES),An energy storage facility that compresses air into underground caverns or tanks and releases it to generate electricity during peak demand.
+Concentrated Solar Power (CSP),"A solar power facility that uses mirrors or lenses to concentrate sunlight to generate heat, which drives a turbine to produce electricity."
+Condominium,A multi-unit residential building where individual units are privately owned while common areas are collectively maintained.
+Construction and Demolition Waste Landfill,"A designated disposal site for inert waste materials generated from construction, renovation, and demolition activities."
+Conventional Commuter Railway,A rail system providing scheduled passenger services between urban centers and surrounding suburban or rural areas on standard rail lines.
+Cosmetic Ingredients Plant,"A manufacturing facility producing raw materials, actives, and specialty ingredients used in cosmetics, personal care, and beauty products."
+Cottage,"A small, modest residential dwelling typically located in rural or scenic areas, used as a primary or vacation home."
+Cross-linkable Polyethylene (XLPE) Plant,"A facility producing XLPE, a modified polyethylene with cross-linked polymer chains used in power cables and piping systems."
+Crude Oil Pipeline,A pipeline infrastructure system that transports crude oil from extraction sites to refineries or storage terminals over long distances.
+Cumene Plant,"A chemical plant that produces cumene by alkylating benzene with propylene, serving as a precursor to phenol and acetone production."
+Cyclohexane Plant,"A facility producing cyclohexane by hydrogenating benzene, used as a solvent and as a raw material for nylon and adipic acid manufacturing."
+Dairy Processing Plant,"A facility that processes raw milk into dairy products such as pasteurized milk, cheese, yogurt, butter, and cream."
+Dam,"A barrier built across a waterway to impound water for hydroelectric power generation, irrigation, flood control, or water supply."
+Data Center,"A facility housing computer servers, networking equipment, and storage systems for processing, storing, and distributing digital data."
+Desalination Plant,"A facility that removes salt and dissolved minerals from seawater or brackish water to produce fresh, potable water."
+Detached Housing,A standalone single-family residential building that is not physically attached to any other dwelling.
+Diammonium Phosphate (DAP) Plant,"A facility producing DAP fertilizer, a highly concentrated phosphate and nitrogen source widely used in crop production."
+District Cooling Plant,A centralized facility that produces chilled water and distributes it through a network of pipes to cool multiple buildings in a district.
+District Heating Plant,A centralized facility that generates and distributes heat through insulated pipelines to provide space heating and hot water to multiple buildings.
+Dormitory,"A residential building providing shared or individual sleeping quarters for students, workers, or institutional occupants."
+Drainage System,"A network of channels, pipes, and structures designed to remove excess surface water or wastewater from urban or agricultural areas."
+Dredging,"The excavation and removal of sediment, debris, or material from the bed of a water body to deepen or maintain waterways and harbors."
+Drive-in Movie Facility,"An outdoor venue where patrons watch films from their vehicles, using a large projection screen and in-car audio systems."
+Drug Intermediates,A facility producing chemical compounds that serve as intermediate steps in the synthesis pathway of active pharmaceutical ingredients.
+Duplex Apartment,"A residential unit occupying two floors within a single building, typically with an internal staircase connecting the levels."
+Dyes and Pigments Plant,"A manufacturing facility producing synthetic dyes and pigments used in textiles, paints, coatings, and plastics."
+E-waste Recycling Plant,A facility that processes end-of-life electronic devices to recover valuable metals and safely dispose of hazardous components.
+Effluent Treatment Plants,A facility that treats industrial or commercial wastewater to remove pollutants before discharge into water bodies or municipal systems.
+Electricity Transmission Tunnel,An underground tunnel housing high-voltage power cables to transmit electricity across urban or environmentally sensitive areas.
+Electrolyzer Manufacturing Plant,"A facility producing electrolyzers, devices that split water into hydrogen and oxygen using electricity, key for green hydrogen production."
+Ethanol Plant,"A facility that produces ethanol through fermentation of biomass or chemical synthesis, used as a biofuel, solvent, or industrial chemical."
+Ethylene DiChloride (EDC) Production,"A chemical plant that produces ethylene dichloride by chlorinating ethylene, serving as the primary feedstock for PVC manufacturing."
+Ethylene Glycol Plant,"A facility producing ethylene glycol, used as an antifreeze agent and as a raw material for polyester fibers and PET resins."
+Ethylene Oxide Plant,"A plant producing ethylene oxide by oxidizing ethylene, used in making ethylene glycol, surfactants, and other chemicals."
+Ethylene Plant,"A steam cracking facility that produces ethylene, the world's most produced organic chemical, used as a key building block for plastics and chemicals."
+Ethylene Propylene Diene Monomer Plant (EPDM),"A facility producing EPDM rubber, a synthetic elastomer with excellent weathering and ozone resistance used in seals, roofing, and automotive parts."
+Ethylene Vinyl Acetate (EVA) Plant,"A plant producing EVA copolymer, a flexible and transparent material used in solar cell encapsulants, footwear, and packaging films."
+Ferrous Material,"A facility involved in the production, processing, or recycling of iron-based metals including steel and cast iron."
+Fire Station,"A public safety building housing firefighting equipment, emergency vehicles, and personnel ready to respond to fire and rescue emergencies."
+Flavors and Fragrances Plant,"A manufacturing facility producing natural and synthetic flavor compounds and fragrances for use in food, beverages, cosmetics, and household products."
+Floating Liquefied Natural Gas (FLNG),"An offshore vessel that processes and liquefies natural gas at sea, eliminating the need for onshore LNG plant infrastructure."
+Floating Production Storage and Offloading (FPSO),"An offshore vessel used to process crude oil or gas from subsea wells, store it onboard, and offload it to tankers."
+Floating Solar Power Plant,"A solar energy generation system mounted on floating platforms on water bodies, conserving land and benefiting from water cooling."
+Floating Storage and Offloading Unit (FSO),An offshore vessel used solely for storing crude oil or refined products and transferring them to shuttle tankers without processing.
+Floating Storage Regasification Unit (FSRU),A vessel that stores liquefied natural gas offshore and regasifies it for delivery into onshore pipeline networks.
+Flood Control & Protection System,"Infrastructure including levees, floodgates, retention basins, and barriers designed to manage and mitigate flood risks in vulnerable areas."
+Flow Battery Production Plant,"A facility manufacturing flow batteries, rechargeable systems where energy is stored in liquid electrolyte solutions for large-scale storage applications."
+Fluid Catalytic Cracking (FCC) Unit,"A refinery unit that converts heavy oil fractions into lighter, higher-value products such as gasoline and propylene using a catalyst at high temperatures."
+Fluorine Chemical Plant,"A facility that produces fluorine-based chemicals including fluoropolymers, refrigerants, and fluorinated intermediates for industrial use."
+Flyover,An elevated road or bridge structure that passes over another road or railway intersection to ease traffic congestion.
+Flywheel Energy Storage (FES),An energy storage system that stores kinetic energy in a rapidly spinning rotor and releases it as electricity when needed.
+Food Additives Plant,"A manufacturing facility producing preservatives, emulsifiers, colorants, flavor enhancers, and other substances added to food products."
+Food Processing Plant,"A facility that transforms raw agricultural ingredients into processed food products through cleaning, cutting, cooking, packaging, and preservation."
+Freight and Other Material Railway,"A rail network designed for the transportation of goods, commodities, and raw materials between industrial sites, ports, and distribution centers."
+Garages and Service Station,"A facility providing vehicle fueling, maintenance, repair, and parking services for private and commercial vehicles."
+Gas Chemical Storage,"A facility designed for the safe storage of chemicals in gaseous phase, including pressurized or cryogenic gas tanks and associated infrastructure."
+Gas Power Plant,"A power station that burns natural gas in turbines or engines to generate electricity, often with combined heat and power capability."
+Gas Processing Plant,A facility that removes impurities and separates natural gas liquids from raw natural gas to prepare it for pipeline transport.
+Gas Turbine Manufacturing Plant,"A facility that designs and manufactures gas turbines used in power generation, aviation, and industrial drive applications."
+Gas-to-Liquids (GTL) Plant,A chemical conversion facility that transforms natural gas into liquid hydrocarbons such as synthetic fuels and lubricants via the Fischer-Tropsch process.
+Gasification Plant,"A facility that converts carbonaceous materials such as coal, biomass, or waste into synthesis gas (syngas) through high-temperature partial oxidation."
+Geothermal Power Plant,A power plant that harnesses heat from the Earth's interior through steam or hot water resources to generate electricity.
+Glass,"A manufacturing or processing facility that produces flat, container, or specialty glass products for construction, packaging, and industrial applications."
+Glass Recycling Facility,"A facility that collects, sorts, and reprocesses waste glass into cullet for reuse in new glass manufacturing, reducing raw material consumption."
+Glycol Plant,"A chemical plant producing glycols such as monoethylene glycol (MEG) or propylene glycol, used in antifreeze, polyesters, and pharmaceuticals."
+Golf Course,"A recreational outdoor facility designed for playing golf, featuring multiple holes across a landscaped terrain."
+Hanger,"A large enclosed structure at an airport or airbase used for housing, maintaining, and repairing aircraft."
+Harbor,A sheltered coastal or inland waterway area providing safe anchorage and docking facilities for ships and boats.
+Hazardous Waste Landfill,A specially engineered disposal site for chemically or biologically hazardous waste materials requiring containment to prevent environmental contamination.
+Hazardous Waste Treatment Facility,"A facility that processes, neutralizes, or detoxifies hazardous industrial or chemical waste prior to safe disposal or recycling."
+Health & Athletic Club,"A recreational facility offering fitness equipment, classes, pools, and wellness services to members for health and exercise purposes."
+Heavy Machinery Manufacturing Plant,"A facility producing large industrial equipment such as cranes, excavators, mining machines, and turbines for construction and industry."
+Helium Plant,"A facility that extracts and purifies helium from natural gas streams for use in cryogenics, MRI machines, and semiconductor manufacturing."
+High Speed Railway,"A railway system operating at significantly higher speeds than conventional trains, connecting major cities with fast and efficient service."
+High-Rise Apartment,"A multi-story residential building with many floors, typically containing numerous individual units and shared common areas."
+Highway,"A major public road designed for high-speed, long-distance vehicular travel connecting cities, regions, or countries."
+Holiday Home,"A secondary residential property used primarily for recreation or leisure, often located in a tourist or scenic destination."
+Hospital,"A medical institution providing inpatient and outpatient care, surgery, emergency services, and diagnostic facilities to patients."
+Hotel,"A commercial establishment providing paid lodging, meals, and services to travelers and tourists on a short-term basis."
+Hybrid Power Plant,"A power generation facility that combines two or more energy sources such as solar, wind, battery, and diesel to optimize reliability and efficiency."
+Hydro Turbine Manufacturing Plant,A facility that manufactures hydraulic turbines and associated equipment used in hydroelectric power generation plants.
+Hydrocracking Unit,"A refinery unit that uses hydrogen and a catalyst to break down heavy oil fractions into lighter, higher-value products such as diesel and jet fuel."
+Hydroelectric Power Plant,A power facility that converts the kinetic and potential energy of flowing or falling water into electricity using turbines and generators.
+Hydrofluoric Acid Alkylation Unit,A refinery unit that combines isobutane with light olefins using hydrofluoric acid as a catalyst to produce high-octane alkylate for gasoline blending.
+Hydrogen Infrastructure,"The network of production, storage, transportation, and distribution systems required to support hydrogen as an energy carrier."
+Hydrogen New Pipeline,Newly constructed pipeline infrastructure dedicated to transporting hydrogen gas from production sites to end-use facilities.
+Hydrogen Peroxide Plant,"A chemical facility producing hydrogen peroxide, used as a bleaching agent, disinfectant, and oxidant in chemical and industrial processes."
+Hydrogen Pipelines Repurpose,The conversion and adaptation of existing natural gas pipelines to safely transport hydrogen fuel across distribution networks.
+Hydrogen Production Plants,"Facilities that generate hydrogen gas through methods such as steam methane reforming, electrolysis, or biomass gasification."
+Hydrogen Storage,"Infrastructure or systems for safely storing hydrogen in compressed, liquid, or solid-state form for distribution or energy use."
+Hydrogen Tanker Ship,A specialized vessel designed to transport liquefied or compressed hydrogen across sea routes between production and demand centers.
+Hyperloop,A high-speed ground transportation system that propels passenger or freight pods through low-pressure tubes at near-sonic speeds.
+Ice Rink,"An indoor or outdoor facility with a frozen surface used for ice skating, ice hockey, figure skating, and other winter sports."
+Incinerator (Waste-to-Energy (WtE)),A facility that combusts municipal or industrial waste at high temperatures to generate heat or electricity while reducing waste volume.
+Industrial Gasses,"A facility that produces, purifies, and distributes industrial gases such as oxygen, nitrogen, hydrogen, argon, and carbon dioxide for various industries."
+Industrial Waste Landfill,A designated site for the controlled disposal of non-hazardous solid waste generated by industrial and manufacturing activities.
+Inert Waste Landfill,"A disposal site for construction and demolition waste materials that do not undergo significant biological, chemical, or physical transformation."
+Iso-propyl Alcohol Plant,"A facility producing isopropyl alcohol (IPA), a common solvent and disinfectant used in pharmaceuticals, cosmetics, and electronics cleaning."
+Jetty,"A structure extending into water, used as a landing point for vessels or to protect a harbor from wave action."
+Laboratory,"A controlled-environment facility equipped for scientific research, testing, analysis, and experimentation."
+Land Reclamation,"The process of creating new land from sea, riverbeds, or other water bodies through filling with soil or other materials."
+Launching Pad,"A fixed or mobile platform infrastructure from which rockets, missiles, or spacecraft are launched into the atmosphere."
+Lead Acid (LAB) Battery Production Plant,"A facility manufacturing lead-acid batteries, the most widely used rechargeable batteries in automotive, industrial, and backup power applications."
+Library,"A public or institutional facility providing collections of books, digital resources, and spaces for reading, research, and community programs."
+Light Rail Transit,"An urban rail transit system that operates at lower speeds and capacity than heavy rail, typically running on city streets or dedicated tracks."
+Liquid Chemical Storage,"A facility equipped with tanks, containment systems, and safety infrastructure for the bulk storage of liquid chemicals."
+Lithium Hydroxide Plant,"A facility producing lithium hydroxide from lithium minerals or brines, a critical material for high-energy cathodes in lithium-ion batteries."
+Lithium-ion (Li-ion) Battery Production Plant,"A manufacturing facility producing lithium-ion battery cells, modules, or packs for electric vehicles, consumer electronics, and energy storage."
+LNG Liquefaction Plant,A facility that cools natural gas to -162°C to convert it into liquefied natural gas (LNG) for storage and export by tanker ships.
+LNG Regasification Plant,"A terminal facility that receives LNG imports, warms and vaporizes the liquid back into gas, and injects it into the pipeline network."
+Low-Rise Apartment,"A residential building of limited height, typically up to four floors, containing multiple individual dwelling units."
+Maleic Anhydride Plant,"A chemical facility producing maleic anhydride, used in the manufacture of unsaturated polyester resins, agricultural chemicals, and lubricants."
+Marine and Ocean Waste Management,"Systems and facilities for collecting, treating, and managing waste generated from marine activities or washed ashore from ocean environments."
+Mass Rapid Transit/Metro,A high-capacity urban rail transit system operating on exclusive tracks to move large volumes of passengers quickly through cities.
+Material Recovery Facility,A facility that sorts and processes recyclable materials recovered from the waste stream for sale to secondary materials markets.
+Medical Waste Treatment Facility,"A facility that sterilizes, inactivates, or otherwise treats infectious and hazardous medical waste before disposal."
+Metal Processing Plant,"A facility that melts, shapes, alloys, or finishes metals into intermediate or final products for industrial use."
+Metal Recycling Facility,"A plant that collects, sorts, shreds, and melts scrap metals for reprocessing into recycled metal feedstocks for manufacturing."
+Methanol Plant,"A chemical production facility that synthesizes methanol from natural gas, coal, or biomass, used as a fuel, solvent, and chemical feedstock."
+Methyl Isobutyl Carbinol Plant,"A facility producing MIBC, a frother chemical used primarily in flotation processes for mineral and ore processing."
+Mineral Mining,"An operation involving the extraction of minerals, ores, or precious metals from the earth through surface or underground mining techniques."
+Mineral Processing Plant,"A facility that crushes, grinds, separates, and concentrates ores and minerals for further refining or industrial use."
+Mining Tunnel,An underground excavation created during mining operations to access ore deposits or provide ventilation and transport routes.
+Mining Washery,A facility that separates and cleans coal or ore by washing with water and separating impurities based on density.
+Mining Waste Management,"Systems and facilities for the safe containment, treatment, and rehabilitation of tailings, spoil heaps, and other mining waste."
+Minor Metal,"A facility or operation focused on the production of specialty or less-common metals such as titanium, lithium, or vanadium."
+Missile Facility,"A secure military installation for the storage, maintenance, assembly, or launch of guided missiles and related systems."
+Mixed-Use Building,"A structure that combines residential, commercial, and sometimes industrial spaces within a single development."
+Modular Housing,A type of housing constructed from prefabricated sections or modules manufactured off-site and assembled at the building location.
+Monoammonium Phosphate (MAP) Plant,"A facility producing MAP fertilizer, a water-soluble phosphate and nitrogen source used in crop nutrition and fire retardants."
+Monorail,"A railway system that runs on a single rail or beam, used for urban transit or theme park transportation."
+Mosque,"A place of Islamic worship where Muslims gather for daily prayers, religious education, and community activities."
+Motel,"A roadside accommodation facility designed for motorists, offering direct room access from parking areas."
+Municipal Solid Waste Landfill,"A controlled disposal site for household and commercial solid waste, engineered to minimize environmental impact and manage leachate and gas."
+Museum,"A public institution that collects, preserves, researches, and exhibits objects of cultural, historical, scientific, or artistic significance."
+Natural Gas Pipeline,"A network of pipes that transports natural gas from production sites, processing plants, or import terminals to distribution points and consumers."
+Nickel-Cadmium (NiCd) Battery Production Plant,"A facility manufacturing nickel-cadmium rechargeable batteries used in power tools, emergency lighting, and portable electronics."
+Nickel-Metal Hydride (NiMH) Battery Production Plant,"A facility producing NiMH rechargeable batteries, used in hybrid vehicles, consumer electronics, and medical devices."
+Nitric Acid Plant,"A chemical facility producing nitric acid through catalytic oxidation of ammonia, primarily used in fertilizer and explosives manufacturing."
+Nitrogen Plant,"A facility that produces and purifies nitrogen gas for industrial applications including food packaging, electronics manufacturing, and chemical processing."
+Nitrous Oxide (N2O) Plant,"A facility producing nitrous oxide for medical anesthesia, food industry applications, and as an oxidizer in aerospace propulsion."
+Non-Ferrous Material,"A facility involved in producing or processing metals that do not contain iron in significant amounts, such as copper, aluminum, or zinc."
+NPK Fertilizer Plant,"A facility producing compound fertilizers containing nitrogen, phosphorus, and potassium in varying ratios tailored to crop nutritional needs."
+Nuclear Power Plant,"A facility that uses nuclear fission reactions to generate heat, which produces steam to drive turbines for electricity generation."
+Nuclear Waste Disposal Site,A highly engineered facility for the long-term isolation and containment of radioactive waste from nuclear power and weapons programs.
+Nylon Fiber Plant,"A facility that polymerizes and spins nylon into continuous filament or staple fiber for use in textiles, carpets, and industrial applications."
+Office Building,"A commercial building designed to accommodate business, professional, and administrative activities in individual or open-plan workspaces."
+Offshore Wind Power Plant,A wind energy facility located in open water where turbines are mounted on fixed or floating foundations to harness strong offshore winds.
+Oil Power Plant,A thermal power station that burns fuel oil or distillate to generate steam or directly drives turbines for electricity production.
+Oil Refinery and Petrochemical Complex,An integrated facility combining crude oil refining with petrochemical production to maximize value from hydrocarbon feedstocks.
+Oil to Petrochemical Complex,"A facility that directly converts crude oil into petrochemical products such as olefins and aromatics, bypassing conventional fuel-focused refining."
+Oilfield Chemicals Plant,"A facility producing specialty chemicals used in oil and gas exploration, drilling, production, and well stimulation operations."
+Onshore Wind Power Plant,A wind energy facility located on land where turbines convert wind kinetic energy into electricity.
+Ore & Metal Refinery,"A facility that refines crude ores or impure metals into high-purity metals or alloys through smelting, electrolysis, or chemical processes."
+Other Airport Facilities,"Supporting infrastructure at airports including maintenance hangars, cargo terminals, fuel farms, and control towers."
+Other Basic Inorganics Plants,"Facilities producing fundamental inorganic chemicals not classified elsewhere, such as salts, acids, or alkalis for industrial use."
+Other Battery Component Plant,"Facilities manufacturing miscellaneous battery components not separately classified, contributing to battery cell and pack assembly."
+Other Battery Manufacturing Plant,"Facilities producing battery types or formats not covered by specific categories, for various energy storage applications."
+Other Biofuels Production Facilities,"Facilities producing renewable fuels from biological sources not classified under bioethanol, biodiesel, or biomethane categories."
+Other Chemical Plants,Industrial facilities producing chemicals that do not fall under more specific plant categories in the classification system.
+Other Chemical Storage,"Storage facilities for chemical products that do not fit into gas, liquid, or solid chemical storage categories."
+Other Commercial Facility,"Commercial buildings or establishments serving retail, hospitality, or service functions not covered by specific categories."
+Other Communication Infrastructure,"Telecommunication infrastructure including towers, cables, exchanges, and data networks not covered by specific categories."
+Other Educational Building,"Educational facilities such as training centers, vocational schools, or institutes not classified under colleges, schools, or universities."
+Other Electricity Transmission Infrastructure,"Electrical transmission infrastructure including switchyards, capacitor banks, and reactive power equipment not separately categorized."
+Other Energy Storage Facilities,"Energy storage systems using technologies not specifically categorized, such as advanced thermal or mechanical storage."
+Other Fertilizer Plants,"Facilities producing fertilizers not classified under specific fertilizer types such as DAP, MAP, NPK, or urea."
+Other Fine Chemical Plants,"Facilities manufacturing specialized, high-purity chemicals for pharmaceuticals, agriculture, and electronics not elsewhere classified."
+Other Health Care Building,"Healthcare facilities including clinics, nursing homes, rehabilitation centers, and specialized medical facilities beyond hospitals."
+Other Hospitality,"Lodging and hospitality facilities not classified under hotels, motels, or resorts, such as guesthouses or serviced apartments."
+Other Industrial Gases Plant,Facilities producing industrial gases beyond commonly classified types such as specialty gas mixtures or rare gases.
+Other Industrial Plants,Manufacturing or processing facilities not covered by specific industrial plant categories in the classification system.
+Other Infrastructure Facilities,Civil and public infrastructure assets not classified under specific infrastructure categories.
+Other Institutional Buildings,"Buildings serving public or civic institutional functions such as courthouses, government offices, or embassies not elsewhere classified."
+Other Integrated Facilities,Multi-function industrial or commercial complexes combining several production or service activities in a single site.
+Other Intermediates Plants,Facilities producing chemical intermediates used in downstream synthesis that do not fit into more specific intermediate categories.
+Other Leisures,Recreational and leisure facilities not covered by specific categories such as entertainment venues or community recreation spaces.
+Other Manufacturing Plant,General manufacturing facilities producing goods not captured by more specific manufacturing plant categories.
+Other Marine & Inland Water Infrastructure,"Marine and waterway infrastructure such as locks, buoys, dredging facilities, and river control structures not separately classified."
+Other Metal & Material Production Plant,"Facilities producing metals, minerals, or advanced materials not captured by specific metal production categories."
+Other Mining Facilities,"Mining-related infrastructure and support facilities such as headframes, ventilation systems, or mine offices not separately classified."
+Other Multi-Family Housing,"Residential buildings housing multiple households in formats not covered by condominium, apartment, or dormitory categories."
+Other Oil & Gas Facilities / Services,"Oil and gas industry infrastructure, vessels, and support facilities not separately categorized."
+Other Outdoor Leisure Facilities,"Open-air recreation areas and amenities including parks, trails, and sports areas not covered by specific facility types."
+Other Performance Chemicals Plant,Facilities producing functional or specialty chemicals with specific performance properties for industrial or consumer applications.
+Other Polymer Plants,Facilities manufacturing polymers and plastic materials not classified under specific named polymer production categories.
+Other Public Buildings,Government or publicly owned buildings serving civic functions not captured by specific categories.
+Other Railway Infrastructure,"Railway system components such as depots, maintenance facilities, signaling systems, and level crossings not separately classified."
+Other Renewable Energy Plant,"Renewable energy generation facilities using technologies not categorized under solar, wind, hydro, geothermal, or biomass."
+Other Research Facility,Scientific and technical research buildings or laboratories not covered by specific research facility classifications.
+Other Residential Buildings,"Residential structures that do not fit standard housing categories, including unusual dwelling types or specialized accommodation."
+Other Retail Building,"Commercial retail spaces and buildings not classified under shopping centers, retail stores, or other specific retail categories."
+Other Road Infrastructure,"Road-related infrastructure components such as rest areas, tollbooths, signage systems, and road maintenance depots."
+Other Sewage Infrastructure,"Sewage collection, treatment, and disposal components not classified under specific sewage infrastructure categories."
+Other Silicone Monomer Plants,Facilities producing silicone monomer compounds not classified under the primary silicone monomer plant category.
+Other Specialty Inorganics Plants,Facilities manufacturing specialized inorganic chemicals with niche industrial applications not separately categorized.
+Other Specialty Polymers,Facilities producing high-performance polymers with specialized properties for demanding engineering or medical applications.
+Other Sustainable Fuel Plants,"Facilities producing fuels from sustainable or low-carbon sources not classified under SAF, biodiesel, or bioethanol categories."
+Other Syngas Derivatives,"Facilities producing chemicals or fuels derived from synthesis gas not classified under methanol, GTL, or other named categories."
+Other Transportation and Storage Building,Buildings or structures supporting transportation operations and storage functions not classified under specific categories.
+Other Waste Management Projects,"Waste management schemes or facilities not covered by specific waste disposal, treatment, or recycling categories."
+Other Waste Recycling Plant,"Recycling facilities processing waste streams not covered by specific material recycling categories such as glass, metal, or plastic."
+Other Waste Treatment Facility,"Facilities providing waste treatment services not classified under hazardous, medical, chemical, or biological treatment categories."
+Other Water and Sewage Infrastructure,"Water and wastewater system components not classified under specific water supply, sewage, or drainage infrastructure categories."
+Other Water Infrastructure,"Water system assets including reservoirs, intake structures, and distribution networks not classified under specific water infrastructure types."
+Others Non-Renewable Energy,"Power generation facilities using non-renewable energy sources not classified under coal, oil, gas, or nuclear categories."
+Outdoor Recreation Facility,"An open-air venue providing structured recreational activities such as adventure sports, picnic areas, or nature experiences."
+Overhead,"Aerial infrastructure such as lines, cables, or structures mounted above ground level for power, communication, or transport purposes."
+Overhead Transmission Line,High-voltage electrical conductors suspended on towers or poles to transmit electricity over long distances from generators to substations.
+Overpass,"An elevated road, bridge, or passage that allows one route to cross over another without intersection."
+Paints and Coatings Plant,"A manufacturing facility producing protective and decorative paints, varnishes, lacquers, and coatings for construction and industrial use."
+Paper & Pulp Mill,"A facility that processes wood fiber or recycled paper into pulp and manufactures paper, cardboard, or tissue products."
+Paper Recycling Facility,"A plant that collects, sorts, and reprocesses waste paper and cardboard into recycled fiber for new paper production."
+Park & Playground,"A public outdoor space designed for recreation, leisure, and play, featuring natural landscaping, benches, and play equipment."
+Parking Facility,A designated area or multi-story structure providing spaces for the temporary storage and parking of vehicles.
+PDH-PP (Propane Dehydrogenation - Polypropylene) Plant,"An integrated facility that converts propane into propylene via dehydrogenation, then polymerizes propylene into polypropylene resin."
+Penitentiary,A secure correctional institution housing individuals sentenced to long-term imprisonment under government supervision.
+"Pesticide Plant (Insecticides, Herbicides, Fungicides)","A chemical manufacturing facility producing active substances for crop protection including insect, weed, and fungal control products."
+PET Food Plant,A facility manufacturing processed food products specifically formulated for the nutritional needs of domestic pets.
+Petrochemical Complex,"A large industrial facility that converts petroleum and natural gas feedstocks into a wide range of chemicals, polymers, and specialty products."
+Petroleum Coke Calcination Unit,A facility that heats green petroleum coke to high temperatures to produce calcined coke used in aluminum smelting and electrode manufacturing.
+Pharmaceutical Formulation,"A facility that combines active pharmaceutical ingredients with excipients to produce final dosage forms such as tablets, capsules, or injections."
+Pharmaceutical Plant,"An integrated manufacturing facility producing pharmaceutical drugs through synthesis, formulation, and quality-controlled packaging."
+Phenol Plant,"A chemical facility producing phenol from cumene oxidation, used in the manufacture of bisphenol-A, resins, and pharmaceuticals."
+Phosphoric Acid Plant,"A facility producing phosphoric acid by treating phosphate rock with sulfuric acid, primarily used in fertilizer and food processing industries."
+Phthalic Anhydride Plant,"A chemical plant producing phthalic anhydride from o-xylene oxidation, used in plasticizers, alkyd resins, and pigments."
+Pier,"A raised platform extending over water, used for docking vessels, recreational activities, or as a public walkway."
+Plant Growth Regulators Production Facility,"A facility manufacturing chemical compounds that modify plant growth processes such as germination, flowering, and fruit development."
+Plasma Arc Gasification Plant,A waste-to-energy facility using extremely high-temperature plasma torches to gasify waste into syngas and vitrified slag.
+Plastic Recycling Facility,"A plant that collects, sorts, cleans, and reprocesses plastic waste into recycled resin or pellets for use in new plastic products."
+Poly Lactic Acid (PLA) Plant,"A facility producing PLA, a biodegradable bioplastic derived from fermented plant sugars, used in packaging and biomedical applications."
+Polyacetal (POM) Plant,"A facility producing polyoxymethylene engineering thermoplastic, known for its high stiffness and dimensional stability in precision parts."
+Polyacrylamide (PAM) Plant,"A chemical facility producing polyacrylamide polymer, used as a flocculant in water treatment, enhanced oil recovery, and paper making."
+Polyamide (Nylon) Plant,"A facility producing polyamide polymers such as nylon-6 and nylon-6,6, used in textiles, automotive parts, and engineering plastics."
+Polybutadiene Plant,"A facility producing polybutadiene rubber (BR), a synthetic elastomer used in tires, golf balls, and high-impact polystyrene modification."
+Polycarbonate Plant,"A facility producing polycarbonate, a transparent, impact-resistant thermoplastic used in eyewear lenses, electronics, and safety applications."
+Polyester Fiber Plant,"A facility that polymerizes PET and spins it into polyester fibers for textiles, non-wovens, and technical fabric applications."
+"Polyethylene Plant (HDPE, LDPE, LLDPE, UHMWPE)","A facility producing various grades of polyethylene resin, the world's most produced plastic, used in films, pipes, bottles, and packaging."
+Polyethylene Terephthalate (PET) Plant,"A facility producing PET polymer used in beverage bottles, food packaging, and polyester fibers through polycondensation reactions."
+Polyhydroxyalkanoates (PHA) Plant,"A facility producing PHA biopolymers derived from microbial fermentation, serving as a biodegradable alternative to conventional plastics."
+Polyisobutylene (PIB) Plant,"A facility producing polyisobutylene, a viscous polymer used in lubricant additives, adhesives, sealants, and butyl rubber blends."
+Polyisoprene Plant,"A facility producing synthetic polyisoprene rubber, structurally similar to natural rubber, used in medical gloves and adhesive applications."
+Polymethyl Methacrylate (PMMA) Plant,"A facility producing PMMA acrylic glass, a transparent thermoplastic used as a lightweight alternative to glass in signs and displays."
+Polypropylene Plant,"A facility producing polypropylene resin, a versatile thermoplastic used in packaging, automotive components, textiles, and household goods."
+Polystyrene Plant,"A facility producing polystyrene resin, used in disposable packaging, insulation foam, and consumer electronics housings."
+Polytetrafluoroethylene (PTFE) Plant,"A facility producing PTFE fluoropolymer, known by the brand Teflon, used in non-stick coatings, seals, and high-performance applications."
+Polyurea Plant,"A facility producing polyurea elastomers through the rapid reaction of isocyanates and amines, used in coatings, linings, and waterproofing."
+Polyurethane Plant,"A facility producing polyurethane polymers used in foams, adhesives, coatings, elastomers, and insulation applications."
+Polyvinyl Alcohol Plant,"A facility producing polyvinyl alcohol (PVA), a water-soluble synthetic polymer used in adhesives, coatings, films, and textile sizing."
+Polyvinyl Chloride (PVC) Plant,"A facility producing PVC polymer from vinyl chloride monomer, used in pipes, flooring, window frames, and medical devices."
+Port Facility,"A commercial waterfront complex providing infrastructure for loading, unloading, and transshipment of cargo and passengers between ships and land."
+Potassium Chloride (Potash) Plant,"A facility processing potash ore into potassium chloride fertilizer, supplying the essential potassium nutrient for plant growth."
+Power Barge,"A floating power generation unit mounted on a barge, used to supply electricity to coastal or remote areas on a temporary or permanent basis."
+Precious Metal,"A facility for mining, refining, or processing precious metals such as gold, silver, platinum, and palladium."
+Prefabricated Apartment,A multi-unit residential building where floors or units are manufactured as prefabricated modules and assembled on-site.
+Prefabricated Multi-Family Home,"A residential structure housing multiple families, built using standardized prefabricated components assembled on-site."
+Prefabricated Single-Family Home,"A standalone dwelling for one family, constructed using factory-made components that are transported and assembled on a prepared foundation."
+Printed Circuit Board Chemicals Plant,"A facility producing specialty chemicals used in printed circuit board manufacturing, including etching, plating, and cleaning compounds."
+Printing Inks Plant,"A manufacturing facility producing inks formulated for printing applications including packaging, publications, labels, and commercial graphics."
+Propylene Glycol Plant,"A facility producing propylene glycol, a versatile chemical used as a food additive, pharmaceutical excipient, antifreeze, and industrial solvent."
+Propylene Oxide Plant,"A chemical facility producing propylene oxide, a key feedstock for polyurethane polyols, propylene glycol, and surfactants."
+Propylene Plant,"A facility producing propylene monomer from cracking or dehydrogenation processes, used in polypropylene, acrylonitrile, and chemical production."
+Pumped Hydro Storage (PHS),A large-scale energy storage facility that pumps water uphill when power is abundant and releases it through turbines to generate electricity during peak demand.
+Pumping Station,"A facility housing pumps and associated equipment used to move water, sewage, oil, or other fluids through pipeline systems."
+Pyrolysis Plant,"A facility that thermally decomposes organic materials in the absence of oxygen to produce bio-oil, char, and syngas from waste or biomass."
+Radioactive Waste Management,"A facility or system for the safe collection, conditioning, storage, and disposal of radioactive materials from nuclear activities."
+Railway Production Unit,"A facility manufacturing rolling stock including locomotives, passenger coaches, freight wagons, or metro cars for railway systems."
+Railway Station,"A passenger transport hub providing platforms, waiting areas, ticketing, and services for boarding and alighting rail services."
+Railway Tunnel,"An underground passage constructed for railway operations, allowing trains to pass through mountains, under rivers, or beneath urban areas."
+Rayon Plant,"A facility producing rayon (viscose) fibers by chemically processing cellulose from wood pulp, used in textiles and non-woven materials."
+Refined Products Pipeline,"A pipeline system transporting refined petroleum products such as gasoline, diesel, jet fuel, and LPG from refineries to distribution terminals."
+Refinery,"A processing facility that distills, refines, and converts crude oil into marketable petroleum products such as fuels, lubricants, and feedstocks."
+Renewable Natural Gas Facility (RNG),A facility that upgrades biogas from organic waste sources to pipeline-quality renewable natural gas for injection or vehicle use.
+Reservoir,"A natural or artificial lake used to collect and store water for drinking, irrigation, industrial use, or hydroelectric generation."
+Resort,"An upscale destination facility offering accommodation, entertainment, recreation, and hospitality services in a scenic or themed environment."
+Retail Bank Building,"A commercial building where a bank provides in-person financial services including deposits, loans, and transactions to individual customers."
+Retail Store,A commercial establishment where goods are sold directly to consumers through physical storefronts or outlets.
+Road,A paved or unpaved surface infrastructure designed for vehicular travel between locations.
+Road Tunnel,An underground passage constructed to allow road vehicles to travel through or under geographic obstacles such as mountains or bodies of water.
+Rock Mining,"The extraction of rock materials including limestone, granite, and sandstone from quarries for construction, industrial, and chemical use."
+School,An educational institution providing primary or secondary education to children and adolescents in a structured curriculum environment.
+Sea Walls/Quay,"Coastal defense structures or vertical embankments built along shorelines to prevent erosion, protect infrastructure, and provide vessel berthing."
+Sea Water Cooling Plant,"A facility that extracts seawater to provide cooling for industrial processes, air conditioning systems, or power plant condensers."
+Seed Treatment Chemicals Plant,"A facility producing chemical compounds applied to seeds before planting to protect against pests, diseases, and improve germination."
+Self Storage,A commercial facility offering rentable individual storage units to businesses and individuals for temporary storage of personal or commercial goods.
+Semi-Detached Home,A residential dwelling that shares one common wall with an adjacent property but is otherwise independently owned and accessed.
+Semiconductor Chemicals Plant,"A facility producing ultra-high-purity chemicals, gases, and materials used in semiconductor fabrication processes."
+Semiconductor Plant,A highly advanced manufacturing facility (fab) that produces integrated circuits and microchips on silicon wafers for electronics.
+Sewage Collection & Disposal Line,A network of underground pipes and conduits that collect and convey wastewater from homes and businesses to treatment facilities.
+Sewage Disposal Plant,A facility that processes and safely disposes of treated sewage effluent through methods such as land application or marine outfall.
+Sewage Pumping Station,A facility that uses pumps to move sewage from low-lying collection areas to treatment plants or higher-elevation distribution points.
+Sewage Treatment Plant,"A facility that removes physical, chemical, and biological contaminants from wastewater before it is safely discharged or reused."
+Sewage Tunnel,An underground tunnel providing a large-diameter conduit for sewage or combined stormwater flows beneath urban areas.
+Shopping Centers & Retail Hall,"A large commercial complex housing multiple retail stores, restaurants, entertainment venues, and service businesses under one roof."
+Shore Protection System,"Engineered structures such as breakwaters, groins, and revetments built to protect coastlines from wave erosion and storm damage."
+Silicon Plant,A facility producing metallurgical or polysilicon from quartz and carbon through carbothermic reduction in electric arc furnaces.
+Silicone Monomer Plant,"A facility producing chlorosilane monomers by reacting silicon metal with methyl chloride, used as precursors for silicone polymers."
+Single Superphosphate (SSP) Production Plant,"A facility producing single superphosphate fertilizer by treating rock phosphate with sulfuric acid, providing phosphorus and calcium to soils."
+Ski Tow,A mechanical lift system that tows skiers or snowboarders up a ski slope using a rope or cable mechanism.
+Sludge Management,"A facility or system for the treatment, dewatering, and disposal of sludge generated from wastewater treatment operations."
+Small Scale LNG (SSLNG),"A small-capacity LNG production, distribution, or storage facility serving remote, off-grid, or niche market applications."
+Smelter,"An industrial facility that melts ore to extract base metals such as copper, zinc, lead, or nickel through pyrometallurgical processes."
+Sodium Bicarbonate Plant,"A facility producing sodium bicarbonate (baking soda) for food, pharmaceutical, industrial, and environmental applications."
+Sodium Carbonate (Soda Ash) Plant,"A facility producing soda ash through the Solvay process or natural mining, used in glass, detergents, and chemical manufacturing."
+Sodium Silicate Plant,"A facility producing sodium silicate solutions and solids used in detergents, adhesives, cement, and industrial processes."
+Sodium-Ion Battery Production Plant,"A facility manufacturing sodium-ion batteries, an emerging energy storage technology offering a cost-effective alternative to lithium-ion batteries."
+Solar Photovoltaic Power Plant (PV),A large-scale power generation facility where solar panels convert sunlight directly into electricity through the photovoltaic effect.
+Solar PV Cells & Modules Manufacturing Plant,A facility producing photovoltaic cells and assembling them into modules (solar panels) for commercial and residential power generation.
+Solar PV Panel Recycling Facility,"A plant that processes decommissioned solar panels to recover glass, silicon, metals, and other materials for reuse."
+Solid Chemical Storage,"A facility with warehousing, containment, and safety systems designed for the bulk storage of solid chemical materials."
+Solid-State Battery Production Plant,"A manufacturing facility producing solid-state batteries, which use a solid electrolyte instead of a liquid, offering improved safety and energy density."
+Sorting Plant,"A facility that separates mixed waste, recyclables, or materials by type using mechanical, optical, or manual sorting technologies."
+Spandex Fiber Plant,"A facility producing spandex (elastane) fibers, highly elastic synthetic fibers used in sportswear, underwear, and stretch fabrics."
+Special Economic Zone (SEZ),"A designated geographic area offering preferential economic policies, tax incentives, and streamlined regulations to attract business investment."
+Sports Field,"An outdoor or indoor venue designed for competitive or recreational sports activities including football, cricket, or baseball."
+Stadium,"A large facility with tiered seating for spectators, designed to host sports events, concerts, and large-scale public gatherings."
+Steam Crackers,A petrochemical facility that thermally cracks hydrocarbon feedstocks using steam at high temperatures to produce olefins such as ethylene and propylene.
+Steam Reforming Plant,A chemical facility that reacts hydrocarbons with steam over a catalyst at high temperatures to produce hydrogen and synthesis gas.
+Steam Turbine Manufacturing Plant,"A facility that designs and produces steam turbines for power generation, marine propulsion, and industrial drive applications."
+Steel Mill,An industrial plant that produces steel from iron ore or scrap metal through processes such as the basic oxygen furnace or electric arc furnace.
+Storage Tank,"A fixed container for storing liquids or gases including petroleum, chemicals, or water at industrial or commercial facilities."
+Storage Tanks & Tower,"Elevated or ground-level storage structures for holding water, fuel, or chemicals under pressure or gravity-fed distribution systems."
+Storage Terminal,"A large facility with multiple tanks for the receipt, blending, and distribution of petroleum products, chemicals, or LNG."
+Storm Sewer,An underground drainage system designed to collect and convey rainwater and surface runoff away from urban areas to prevent flooding.
+Streetcar Line,"An urban electric rail transit system running on tracks embedded in city streets, providing short-distance passenger transport."
+Styrene Plant,"A chemical facility producing styrene monomer by dehydrogenating ethylbenzene, used in polystyrene and synthetic rubber manufacturing."
+Styrene-Butadiene Rubber (SBR) Plant,"A facility producing SBR, the most widely used synthetic rubber made by copolymerizing styrene and butadiene, for tires and industrial products."
+Sulfur Storage & Handling,"Infrastructure and facilities for the safe storage, solidification, and transportation of elemental sulfur recovered from refineries and gas plants."
+Sulfuric Acid Alkylation Unit,A refinery unit that combines isobutane with light olefins using sulfuric acid as a catalyst to produce high-octane alkylate blending component.
+Sulfuric Acid Plant,"A chemical facility producing sulfuric acid through the contact process, the most widely produced industrial chemical used in fertilizers and chemicals."
+Supercapacitor/Ultracapacitor Production Plant,"A facility manufacturing electrochemical capacitors that store and release energy rapidly, used in regenerative braking and power electronics."
+Surfactants Production Facility,"A chemical plant producing surface-active agents used in detergents, personal care products, emulsifiers, and industrial cleaning applications."
+Sustainable Aviation Fuels (SAF) Production,A facility producing low-carbon aviation fuel from bio-based or synthetic pathways to reduce the climate impact of air travel.
+Switching Station & Substation,Electrical infrastructure that transforms voltage levels and routes electricity between transmission and distribution networks.
+Synthetic Fuels Production Facilities,"Plants producing liquid or gaseous fuels from non-petroleum sources such as coal, natural gas, or CO2 via chemical synthesis."
+Synthetic Organic Chemical Plant,"A facility producing man-made organic compounds through chemical synthesis for use in pharmaceuticals, agriculture, and industry."
+Temple,"A place of worship for non-Christian religions including Hinduism, Buddhism, or Sikhism, serving as a sacred space for religious practices."
+Terephthalic Acid (PTA) Plant,"A chemical facility producing purified terephthalic acid, the primary raw material for PET polyester used in bottles and fibers."
+Terraced Housing,"A row of identical or similar residential properties sharing common side walls, built as a continuous block along a street."
+Textile Mill,"A manufacturing facility that processes natural or synthetic fibers into yarn, fabric, and textile products through spinning and weaving."
+Textile Recycling Facility,"A facility that collects, sorts, and reprocesses used clothing and textiles into recycled fiber, rags, or new yarn products."
+Thermal Energy Storage (TES),"A system that stores thermal energy (hot or cold) during off-peak hours for use in heating, cooling, or power generation during peak demand."
+Tire Recycling Plant,"A facility that shreds, granulates, and processes end-of-life tires into crumb rubber, steel, and fiber for secondary use."
+Titanium Dioxide Plant,"A chemical facility producing titanium dioxide, the world's primary white pigment used in paints, plastics, paper, and cosmetics."
+Toluene Plant,"A chemical plant producing toluene, an aromatic solvent and chemical precursor used in making benzene, xylene, TNT, and polymers."
+Townhouse,A multi-story residential unit in a row of attached homes sharing party walls but with individual street access and often a private yard.
+Trams Line,"A passenger rail system operating on city streets or dedicated urban tracks, providing fixed-route transit within a metropolitan area."
+Transformer Manufacturing Plant,"A facility producing electrical transformers that step voltage up or down for transmission, distribution, and industrial use."
+Transformer Stations & Substation,"Electrical facilities housing transformers, switchgear, and protective equipment to change voltage levels in the power network."
+Truck Terminal,"A freight logistics hub where goods are loaded, unloaded, sorted, and transferred between trucks for onward distribution."
+Tubes/Underground Rail/Subway Rail,A rapid transit system running in tunnels below city streets providing high-capacity urban passenger transportation.
+Tyre Manufacturing Plant,"A facility producing rubber tires for vehicles including cars, trucks, aircraft, and industrial equipment through vulcanization processes."
+Ultracapacitor,A high-capacity electrochemical capacitor device used for rapid energy storage and release in transportation and industrial power applications.
+Underground Cable,Electrical or telecommunications cables installed below ground level to transmit power or data signals in urban or sensitive environments.
+Underground Transmission Line,High-voltage power cables installed in underground conduits or tunnels to transmit electricity where overhead lines are not feasible.
+Underpass,"A tunnel or passage built beneath a road, railway, or other obstacle allowing pedestrians, cyclists, or vehicles to pass underneath."
+Underwater Transmission Line,"High-voltage submarine cables installed on the seabed to transmit electricity between islands, offshore installations, and mainland grids."
+Underwater/Submarine Cable,"Cables laid on the ocean floor to carry telecommunications data, internet traffic, or power between continents or offshore facilities."
+University,"A higher education institution offering undergraduate, postgraduate, and doctoral programs across a broad range of academic disciplines."
+Upstream - Offshore,"Oil and gas exploration, drilling, and production activities conducted on offshore platforms, subsea systems, and floating production units."
+Upstream - Onshore,"Oil and gas exploration, drilling, and production activities conducted on land including wellheads, flow lines, and production facilities."
+Urea Plant,"A chemical facility producing urea from ammonia and carbon dioxide, the most widely used nitrogen fertilizer in global agriculture."
+Villa,"A spacious, high-quality detached residential dwelling, typically with landscaped gardens and premium finishes, often in a resort or suburban setting."
+Vinyl Acetate Plant,"A chemical plant producing vinyl acetate monomer by reacting ethylene with acetic acid, used in adhesives, paints, and polymer films."
+Warehouse,"A large commercial building used for the storage of raw materials, goods, and products prior to distribution or retail sale."
+Waste to Chemical/Bio-Chemical,"A facility that converts waste materials into valuable chemical or biochemical products through thermal, chemical, or biological processes."
+Waste Water Treatment Plant (WWTP),"A facility that removes physical, chemical, and biological contaminants from wastewater to make it safe for environmental discharge or reuse."
+Water Distribution Line,A network of pipes and infrastructure that delivers treated potable water from treatment plants or reservoirs to residential and commercial users.
+Water Treatment Chemicals Plant,"A facility producing coagulants, disinfectants, and other specialty chemicals used in water and wastewater treatment processes."
+Water Treatment Plant,"A facility that processes raw water from natural sources through filtration, sedimentation, and disinfection to produce safe drinking water."
+Water Tunnel,"An underground tunnel used to convey water for drinking, irrigation, or drainage purposes, typically over long distances beneath urban or mountain terrain."
+Wharf,A structure built along or at an angle to the shore where ships can dock to load or unload cargo and passengers.
+Wind Turbine Manufacturing Plant,"A facility that produces wind turbine components including blades, nacelles, towers, and generators for onshore and offshore wind projects."
+Xylene Isomerization Plant,A refinery or petrochemical unit that converts mixed xylene isomers into the desired para-xylene fraction for PTA and PET production.
+Xylenes Plant,"A chemical facility producing xylene isomers (ortho, meta, and para) from catalytic reforming or coal tar, used in solvents and PTA production."
+Zinc-Based Battery Production Plant,"A facility manufacturing zinc-based rechargeable batteries including zinc-air, zinc-ion, or zinc-bromine systems for energy storage applications."
