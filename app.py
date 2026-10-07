@@ -193,26 +193,16 @@ def evaluate_project_alignment(page_data: dict, worker_url: str = "") -> dict:
     }
 
 # -------------------------------------------------------------
-# 4. Streamlit UI
+# 4. Read Worker URL Silently from Streamlit Secrets
 # -------------------------------------------------------------
-# Read Cloudflare Worker URL from Streamlit Secrets or Sidebar
-default_worker_url = ""
+worker_url = ""
 try:
     if "CLOUDFLARE_WORKER_URL" in st.secrets:
-        default_worker_url = st.secrets["CLOUDFLARE_WORKER_URL"]
+        worker_url = st.secrets["CLOUDFLARE_WORKER_URL"]
     elif "WORKER_URL" in st.secrets:
-        default_worker_url = st.secrets["WORKER_URL"]
+        worker_url = st.secrets["WORKER_URL"]
 except Exception:
     pass
-
-with st.sidebar:
-    st.header("⚙️ Settings")
-    st.info(f"📚 Loaded **{len(SECTORS)}** sectors from `sector_definitions.csv`")
-    worker_url = st.text_input(
-        "Cloudflare Worker URL (Optional):",
-        value=default_worker_url,
-        placeholder="https://your-worker.workers.dev"
-    )
 
 with st.form("url_form"):
     project_url = st.text_input(
