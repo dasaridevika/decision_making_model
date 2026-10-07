@@ -201,7 +201,7 @@ def evaluate_project_alignment(page_data: dict, worker_url: str = "") -> dict:
                 "matched_sector": best_sector,
                 "sector_definition": best_definition
             }
-            worker_resp = requests.post(worker_url.strip(), json=payload, timeout=12)
+            worker_resp = requests.post(worker_url.strip(), json=payload, timeout=15)
             if worker_resp.status_code == 200:
                 worker_data = worker_resp.json()
                 if "is_project" in worker_data:
@@ -210,9 +210,10 @@ def evaluate_project_alignment(page_data: dict, worker_url: str = "") -> dict:
                         "decision": worker_data.get("decision", "YES" if worker_data.get("is_project") else "NO"),
                         "matched_sector": worker_data.get("matched_sector") or best_sector,
                         "sector_definition": worker_data.get("sector_definition") or best_definition,
-                        "confidence": worker_data.get("confidence", 0.90),
-                        "summary": meta_desc or (content[:220] + "..."),
-                        "worker_engine": worker_data.get("model_used", "@cf/cloudflare/clef-flash")
+                        "confidence": worker_data.get("confidence", 0.95),
+                        "summary": worker_data.get("summary") or meta_desc or (content[:220] + "..."),
+                        "reasoning": worker_data.get("reasoning", ""),
+                        "worker_engine": worker_data.get("model_used", "@cf/meta/llama-3-8b-instruct")
                     }
         except Exception as e:
             pass  # Fall back to local sector evaluator
@@ -228,6 +229,7 @@ def evaluate_project_alignment(page_data: dict, worker_url: str = "") -> dict:
         "sector_definition": best_definition if is_project else None,
         "confidence": confidence,
         "summary": meta_desc or (content[:220] + "..."),
+        "reasoning": "",
         "worker_engine": "Local Sector Engine"
     }
 
@@ -254,7 +256,7 @@ if submit_btn:
     if not project_url.strip():
         st.error("Please enter a valid URL to analyze.")
     else:
-        with st.spinner("Extracting webpage context and evaluating with Clef model..."):
+        with st.spinner("Extracting webpage context and evaluating with Cloudflare LLM model..."):
             page_data = fetch_url_context(project_url.strip())
 
             if not page_data.get("success"):
@@ -263,8 +265,10 @@ if submit_btn:
                 result = evaluate_project_alignment(page_data, worker_url=worker_url)
                 is_proj = result.get("is_project", False)
                 engine_used = result.get("worker_engine", "Local Sector Engine")
+                reasoning_text = result.get("reasoning", "")
                 
                 if is_proj:
+                    reasoning_html = f"<p style='color: #047857; margin-top: 0.5rem; font-size: 0.9rem;'><b>💡 LLM Verification:</b> {reasoning_text}</p>" if reasoning_text else ""
                     st.markdown(f"""
                     <div class="yes-card">
                         <div class="badge-yes">✅ YES — This is a Project</div>
@@ -275,6 +279,7 @@ if submit_btn:
                             <p style="margin: 0.35rem 0 0 0; color: #4B5563; font-size: 0.95rem;">
                                 <b>Sector Definition:</b> {result.get('sector_definition')}
                             </p>
+                            {reasoning_html}
                         </div>
                         <div style="margin-top: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
                             <span style="font-size: 0.9rem; color: #166534; font-weight: 600;">
