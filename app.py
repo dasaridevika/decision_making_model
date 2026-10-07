@@ -170,7 +170,20 @@ def evaluate_project_alignment(page_data: dict, worker_url: str = "") -> dict:
             best_sector = sector_name
             best_definition = definition
 
-    # Step B: Check for real-world project operational indicators
+    # Step B: If no recognized sector is matched with sufficient threshold, reject immediately
+    is_recognized_sector = (best_sector is not None) and (best_score >= 45)
+    if not is_recognized_sector:
+        return {
+            "is_project": False,
+            "decision": "NO",
+            "matched_sector": None,
+            "sector_definition": None,
+            "confidence": 0.95,
+            "summary": meta_desc or (content[:220] + "..."),
+            "worker_engine": "Sector Classifier"
+        }
+
+    # Step C: Check for real-world project operational indicators
     project_indicators = [
         "project", "plant", "facility", "capacity", "mw", "gw", "kw", "construction",
         "built", "installed", "commissioned", "developed", "contract", "deal",
@@ -178,15 +191,15 @@ def evaluate_project_alignment(page_data: dict, worker_url: str = "") -> dict:
     ]
     indicator_count = sum(1 for w in project_indicators if w in full_text)
 
-    # Step C: If Cloudflare Worker URL is available, execute Clef decision
+    # Step D: If Cloudflare Worker URL is available, execute Clef decision
     if worker_url.strip():
         try:
             payload = {
                 "url": page_data.get("url", ""),
                 "title": title,
                 "content": content[:2500],
-                "matched_sector": best_sector or "General Industry",
-                "sector_definition": best_definition or "Commercial and industrial operations"
+                "matched_sector": best_sector,
+                "sector_definition": best_definition
             }
             worker_resp = requests.post(worker_url.strip(), json=payload, timeout=12)
             if worker_resp.status_code == 200:
@@ -205,7 +218,7 @@ def evaluate_project_alignment(page_data: dict, worker_url: str = "") -> dict:
             pass  # Fall back to local sector evaluator
 
     # Local fallback threshold: Must match a registered sector AND show project attributes
-    is_project = (best_sector is not None) and (best_score >= 45) and (indicator_count >= 2 or best_score >= 100)
+    is_project = (indicator_count >= 2 or best_score >= 100)
     confidence = min(0.98, round(0.65 + (min(indicator_count, 6) * 0.05), 2)) if is_project else 0.85
 
     return {
@@ -248,7 +261,7 @@ if submit_btn:
                 st.error(f"Could not load webpage: {page_data.get('error')}")
             else:
                 result = evaluate_project_alignment(page_data, worker_url=worker_url)
-                
+                is_proj = result.get("is_project", False)
                 engine_used = result.get("worker_engine", "Local Sector Engine")
                 
                 if is_proj:
