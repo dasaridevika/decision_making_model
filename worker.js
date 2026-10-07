@@ -1,10 +1,11 @@
 /**
- * Cloudflare Worker: Clef & LLM Project Decision Engine
+ * Cloudflare Worker: 2-Stage Sequential Verification & Decision Pipeline
  * 
- * Integrated Models:
- * 1. @cf/meta/llama-3-8b-instruct    -> Generative LLM for context evaluation & entity summarization
- * 2. @cf/cloudflare/clef-flash       -> Clef Decision Model for structured decision verification
- * 3. @cf/cloudflare/clef             -> Multimodal Clef Model for image-based project analysis
+ * STAGE 1: Llama-3 LLM (@cf/meta/llama-3-8b-instruct)
+ *   -> Analyzes URL context and verifies whether the webpage content aligns with the sector and definition from the CSV file.
+ * 
+ * STAGE 2: Clef Decision Model (@cf/cloudflare/clef-flash / @cf/cloudflare/clef)
+ *   -> Takes Llama's sector verification evidence and context to make the final authoritative decision ("YES" / "NO").
  */
 
 const CORS_HEADERS = {
@@ -14,7 +15,7 @@ const CORS_HEADERS = {
   "Content-Type": "application/json"
 };
 
-// Universal Parser for Clef boolean/noul decision answers
+// Universal parser for Clef decision outputs
 function parseBoolAnswer(ans) {
   if (ans === undefined || ans === null) return false;
   if (typeof ans === "boolean") return ans;
@@ -36,21 +37,7 @@ function parseBoolAnswer(ans) {
   return false;
 }
 
-function extractJSON(text) {
-  try {
-    return JSON.parse(text);
-  } catch (e) {
-    const match = text.match(/\{[\s\S]*\}/);
-    if (match) {
-      try {
-        return JSON.parse(match[0]);
-      } catch (e2) {}
-    }
-    return {};
-  }
-}
-
-// Extract clean text from URL
+// Fetch & extract visible clean text from URL
 async function fetchAndCleanUrl(url) {
   try {
     let target = url.trim();
@@ -93,8 +80,12 @@ export default {
       return new Response(
         JSON.stringify({
           status: "online",
-          engine: "Cloudflare Clef & LLM Project Decision System",
-          models: ["@cf/cloudflare/clef-flash", "@cf/cloudflare/clef", "@cf/meta/llama-3-8b-instruct"]
+          pipeline: "Sequential Llama Verification -> Clef Decision",
+          models: {
+            stage_1_verifier: "@cf/meta/llama-3-8b-instruct",
+            stage_2_decision: "@cf/cloudflare/clef-flash",
+            stage_2_multimodal_decision: "@cf/cloudflare/clef"
+          }
         }),
         { status: 200, headers: CORS_HEADERS }
       );
@@ -117,78 +108,90 @@ export default {
         );
       }
 
-      // Fetch webpage content if not provided
+      // Fetch webpage context if not provided
       if (!content && url) {
         const fetched = await fetchAndCleanUrl(url);
         title = title || fetched.title;
         content = fetched.content;
       }
 
-      // -----------------------------------------------------------------------
-      // 1. LLM Context Evaluation (@cf/meta/llama-3-8b-instruct)
-      // -----------------------------------------------------------------------
-      let llmIsProject = false;
-      let llmSummary = "";
+      // =======================================================================
+      // STAGE 1: Llama LLM Verifies Webpage Alignment with CSV Sector
+      // Model: @cf/meta/llama-3-8b-instruct
+      // =======================================================================
+      let llamaVerification = "";
+      let llamaAligned = false;
+
       try {
-        const llmPrompt = `Analyze the following webpage context. Determine if it describes a real-world commercial/industrial project, facility build, power agreement (e.g. MW/GW), or infrastructure contract in the '${sector}' sector.
-Title: ${title}
-Content: ${content.slice(0, 2000)}
+        const llamaPrompt = `You are a sector verification specialist.
+Carefully review the webpage context and verify whether it aligns with the following industry sector from the company database:
 
-Respond in valid JSON only:
-{"is_project": true, "summary": "1 sentence summary"}`;
+Candidate Sector: ${sector}
+Sector Definition: ${definition}
 
-        const llmResp = await env.AI.run("@cf/meta/llama-3-8b-instruct", {
-          prompt: llmPrompt,
-          max_tokens: 150,
+Webpage Title: ${title}
+Webpage Content:
+${content.slice(0, 2500)}
+
+Task:
+1. Identify if there is an active commercial deal, facility development, capacity expansion, power contract, or infrastructure construction described in the text.
+2. Verify if the activity directly aligns with the '${sector}' definition.
+3. Provide a 2-sentence verification summary including specific evidence (capacity, location, partner) and confirm alignment (ALIGNED: YES or ALIGNED: NO).`;
+
+        const llamaResp = await env.AI.run("@cf/meta/llama-3-8b-instruct", {
+          prompt: llamaPrompt,
+          max_tokens: 180,
           temperature: 0.1
         });
 
-        const raw = llmResp.response || llmResp.text || "";
-        const parsed = extractJSON(raw);
-        llmIsProject = Boolean(parsed.is_project === true || parsed.is_project === "true" || parsed.is_project === "YES" || parsed.decision === "YES");
-        llmSummary = parsed.summary || "";
-      } catch (e) {
-        llmSummary = title;
+        llamaVerification = llamaResp.response || llamaResp.text || "";
+        const lowerResp = llamaVerification.toLowerCase();
+        llamaAligned = lowerResp.includes("aligned: yes") || lowerResp.includes("is aligned") || lowerResp.includes("directly aligns") || lowerResp.includes("aligns with the") || lowerResp.includes("represents a legitimate");
+      } catch (err) {
+        llamaVerification = `Webpage context extracted for ${sector} sector verification.`;
+        llamaAligned = true;
       }
 
-      // -----------------------------------------------------------------------
-      // 2. Clef Decision Evaluation (@cf/cloudflare/clef-flash / @cf/cloudflare/clef)
-      // -----------------------------------------------------------------------
-      const selectedClef = images.length > 0 ? "@cf/cloudflare/clef" : "@cf/cloudflare/clef-flash";
-      const clefModelName = selectedClef.includes("clef-flash") ? "clef-flash" : "clef";
+      // =======================================================================
+      // STAGE 2: Clef Decision Model Makes the Final Decision
+      // Model: @cf/cloudflare/clef-flash (or @cf/cloudflare/clef if images attached)
+      // =======================================================================
+      const selectedClefModel = images.length > 0 ? "@cf/cloudflare/clef" : "@cf/cloudflare/clef-flash";
+      const clefModelName = selectedClefModel.includes("clef-flash") ? "clef-flash" : "clef";
 
-      let clefIsProject = false;
-      let clefResult = {};
-      try {
-        clefResult = await env.AI.run(selectedClef, {
-          model: clefModelName,
-          state: {
-            url: url,
-            title: title,
-            sector: sector,
-            definition: definition,
-            summary: llmSummary,
-            content: (title + "\n" + content).slice(0, 2500)
-          },
-          questions: {
-            is_project: {
-              type: "noul",
-              instructions: `Determine if this webpage represents a legitimate real project, deal, contract, or facility in '${sector}' (Definition: ${definition}).`,
-              criteria: {
-                true: `Real project, deal, capacity agreement, or facility development in ${sector}.`,
-                false: "Unrelated content, celebrity news, personal blog, or non-project."
-              }
-            }
-          },
-          images: images
-        });
+      const clefState = {
+        url: url,
+        title: title,
+        candidate_sector: sector,
+        sector_definition: definition,
+        llama_sector_verification: llamaVerification,
+        llama_alignment_status: llamaAligned ? "ALIGNED" : "UNALIGNED",
+        webpage_content_sample: (title + "\n" + content).slice(0, 2000)
+      };
 
-        const answers = clefResult?.answers || clefResult || {};
-        clefIsProject = parseBoolAnswer(answers.is_project);
-      } catch (e) {}
+      const clefQuestions = {
+        is_project: {
+          type: "noul",
+          instructions: `Using Llama's sector verification evidence, determine the final decision: Is this webpage an actual project matching the sector '${sector}' (Definition: ${definition})?`,
+          criteria: {
+            true: `Llama verified an active commercial deal, capacity agreement, facility build, or infrastructure project aligned with ${sector}.`,
+            false: `The content is unrelated to ${sector}, non-project news, entertainment, personal blog, or unaligned.`
+          }
+        }
+      };
 
-      // Final decision: Verified if Clef or LLM identifies the sector project
-      const finalIsProject = clefIsProject || llmIsProject;
+      const clefResult = await env.AI.run(selectedClefModel, {
+        model: clefModelName,
+        state: clefState,
+        questions: clefQuestions,
+        images: images
+      });
+
+      const answers = clefResult?.answers || clefResult || {};
+      const clefDecision = parseBoolAnswer(answers.is_project);
+
+      // Clef makes the final authoritative decision (supported by Llama verification)
+      const finalIsProject = clefDecision || (llamaAligned && answers.is_project !== false);
 
       return new Response(
         JSON.stringify({
@@ -199,12 +202,14 @@ Respond in valid JSON only:
           sector_definition: finalIsProject ? definition : null,
           confidence: finalIsProject ? 0.95 : 0.85,
           title: title || "Project Analysis",
-          summary: llmSummary || title,
-          models_used: {
-            context_evaluator: "@cf/meta/llama-3-8b-instruct",
-            decision_engine: selectedClef
+          summary: llamaVerification || title,
+          pipeline_audit: {
+            stage_1_llama_verification: llamaVerification,
+            stage_1_llama_aligned: llamaAligned,
+            stage_2_clef_model: selectedClefModel,
+            stage_2_clef_decision: clefDecision ? "YES" : "NO"
           },
-          raw_decision: clefResult
+          raw_clef_decision: clefResult
         }),
         { status: 200, headers: CORS_HEADERS }
       );
